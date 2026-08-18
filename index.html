@@ -304,17 +304,7 @@
   }
   .bottle-card:hover .bottle-photo-frame img{transform:scale(1.04);}
   .bottle-photo-animated{position:relative;}
-  .bottle-photo-animated .anim-ring{
-    position:absolute;top:50%;left:50%;width:58%;aspect-ratio:1/1;
-    transform:translate(-50%,-50%);
-    border-radius:50%;border:1px solid rgba(255,255,255,0.55);
-    animation:ringSpin 26s linear infinite;
-    z-index:2;pointer-events:none;
-  }
-  .bottle-photo-animated .anim-ring::before{
-    content:'';position:absolute;top:-3px;left:50%;width:6px;height:6px;margin-left:-3px;
-    background:var(--gold);border-radius:50%;
-  }
+  
   .bottle-photo-animated .anim-sheen{
     position:absolute;inset:0;z-index:3;pointer-events:none;
     background:linear-gradient(115deg, transparent 34%, rgba(255,255,255,0.5) 50%, transparent 66%);
