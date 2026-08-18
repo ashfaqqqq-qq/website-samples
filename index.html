@@ -3,1266 +3,952 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aleez Perfumes — Wear the Unseen</title>
+<title>Aleez Perfumes — Your Scent. Your Signature.</title>
+<meta name="description" content="Aleez Perfumes is a Chennai-based custom fragrance studio. Tell us the scent you want and we'll create it — bespoke perfumes and attars, delivered in about 7 days.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf7f2; --surface:#ffffff; --surface-2:#f4eee3;
-    --blush:#f8ede4; --blush-2:#f1ded1;
-    --ink:#241d17; --ink-2:#141014; --plum:#221019; --plum-2:#331623;
-    --gold:#c9a227; --gold-light:#96721e; --garnet:#8a1c34;
-    --smoke:#2a221b; --smoke-dim:#6c5f50; --smoke-faint:#9c8f7e;
-    --teal:#22403f; --line: rgba(42,34,27,0.12);
-    --wa:#3fae63; --wa-light:#2f9950;
-    --ease: cubic-bezier(.22,.68,.2,1);
+    --ivory:#F8F6F0;
+    --cream:#EFECE3;
+    --card:#FFFFFF;
+    --beige:#E8E2D6;
+    --ink:#171714;
+    --muted:#68645C;
+    --border:#DCD6C9;
+    --gold:#B3915F;
+    --gold-soft:rgba(179,145,95,0.14);
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-  body{ background:var(--bg); color:var(--smoke); font-family:'Manrope', sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
-  ::selection{ background:var(--gold); color:var(--ink); }
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
-  button{ font-family:inherit; cursor:pointer; }
-  .serif{ font-family:'Fraunces', serif; }
-  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.06em; }
-  .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold-light); }
-  .wrap{ max-width:1240px; margin:0 auto; padding:0 32px; }
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%;display:block;}
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+    line-height:1.08;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:11.5px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+  }
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  section{position:relative;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:16px 30px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform .35s cubic-bezier(.22,1,.36,1), background .35s ease, color .35s ease, border-color .35s ease;
+    min-height:48px;
+    white-space:nowrap;
+    border:1px solid transparent;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-dark{background:var(--ink);color:var(--ivory);}
+  .btn-dark:hover{background:#000;}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--ivory);}
+  .btn-whatsapp{background:transparent;color:var(--ink);border-color:var(--border);}
+  .btn-whatsapp:hover{border-color:var(--ink);}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-delay-1{transition-delay:.08s;}
+  .reveal-delay-2{transition-delay:.16s;}
+  .reveal-delay-3{transition-delay:.24s;}
+  .reveal-delay-4{transition-delay:.32s;}
 
   @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+    *{animation:none !important;transition:none !important;}
+    .reveal{opacity:1;transform:none;}
   }
-  @keyframes fadeUp{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:translateY(0);} }
-  .page-fade{ animation:fadeUp .7s var(--ease) both; }
 
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:fixed; top:0; left:0; right:0; z-index:900;
-    display:flex; align-items:center; justify-content:space-between; padding:20px 32px;
-    background:rgba(250,247,242,0.88); backdrop-filter:blur(10px); border-bottom:1px solid transparent;
-    transition:padding .4s var(--ease), border-color .4s;
+  /* ---------------- NAV ---------------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(248,246,240,0.0);
+    border-bottom:1px solid transparent;
+    transition:background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
   }
-  header.nav.scrolled{ padding:13px 32px; border-bottom:1px solid var(--line); }
-  .brand{ font-family:'Fraunces', serif; font-size:21px; letter-spacing:0.12em; font-weight:450; cursor:pointer; }
-  .brand em{ font-style:normal; color:var(--gold-light); }
-  .nav-links{ display:flex; gap:30px; align-items:center; }
-  .nav-links a{ font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--smoke-dim); position:relative; padding-bottom:3px; transition:color .3s; }
-  .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold); transition:width .35s var(--ease); }
-  .nav-links a:hover{ color:var(--smoke); }
-  .nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
-  .nav-links a.active{ color:var(--gold-light); }
-  .nav-actions{ display:flex; align-items:center; gap:16px; }
-  .icon-btn{ background:none; border:none; color:var(--smoke); position:relative; display:flex; align-items:center; }
-  .icon-btn svg{ width:19px; height:19px; }
-  .badge-count{
-    position:absolute; top:-7px; right:-9px; background:var(--gold); color:var(--ink);
-    font-family:'JetBrains Mono',monospace; font-size:10px; width:16px; height:16px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; font-weight:600; opacity:0; transform:scale(0.5); transition:all .3s var(--ease);
+  header.scrolled{
+    background:rgba(248,246,240,0.82);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--border);
   }
-  .badge-count.show{ opacity:1; transform:scale(1); }
-  .nav-wa-btn{
-    display:flex; align-items:center; gap:8px; background:var(--wa); color:#08130d; padding:10px 16px; font-size:11.5px;
-    letter-spacing:0.08em; text-transform:uppercase; font-weight:700; border-radius:2px; transition:transform .3s var(--ease), background .3s;
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    max-width:1180px;margin:0 auto;padding:18px 24px;
   }
-  .nav-wa-btn:hover{ transform:translateY(-2px); background:var(--wa-light); }
-  .nav-wa-btn svg{ width:15px; height:15px; }
-  .hamburger{ display:none; background:none; border:none; color:var(--smoke); width:26px; height:20px; position:relative; }
-  .hamburger span{ position:absolute; left:0; right:0; height:1.4px; background:var(--smoke); transition:all .35s var(--ease); }
-  .hamburger span:nth-child(1){ top:0; }
-  .hamburger span:nth-child(2){ top:9px; }
-  .hamburger span:nth-child(3){ top:18px; }
-  .hamburger.open span:nth-child(1){ transform:translateY(9px) rotate(45deg); }
-  .hamburger.open span:nth-child(2){ opacity:0; }
-  .hamburger.open span:nth-child(3){ transform:translateY(-9px) rotate(-45deg); }
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Cormorant Garamond',serif;font-size:21px;letter-spacing:0.06em;}
+  .logo .mark{
+    height:30px;width:auto;display:block;
+  }
+  .nav-links{display:flex;gap:36px;font-size:13px;letter-spacing:0.04em;}
+  .nav-links a{position:relative;padding:4px 0;color:var(--ink);}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);
+    transition:width .35s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .icon-btn{width:20px;height:20px;display:flex;align-items:center;justify-content:center;}
+  .nav-cta{
+    padding:11px 20px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;
+    border:1px solid var(--ink);border-radius:2px;transition:all .3s ease;
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--ivory);}
+  .mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+  .mobile-menu{
+    display:none;position:fixed;inset:0;background:var(--ivory);z-index:99;
+    padding:100px 32px 40px;flex-direction:column;gap:0;
+    transform:translateY(-8px);opacity:0;pointer-events:none;
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  .mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:auto;}
+  .mobile-menu a{
+    font-family:'Cormorant Garamond',serif;font-size:30px;padding:16px 0;border-bottom:1px solid var(--border);
+  }
+  .mobile-menu .mm-cta{margin-top:32px;}
 
   @media (max-width:900px){
-    .nav-links{
-      position:fixed; top:64px; left:0; right:0; background:var(--surface-2); border-bottom:1px solid var(--line);
-      flex-direction:column; align-items:flex-start; padding:10px 32px 26px; gap:0;
-      transform:translateY(-12px); opacity:0; pointer-events:none; transition:all .35s var(--ease);
-    }
-    .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
-    .nav-links a{ width:100%; padding:14px 0; border-bottom:1px solid var(--line); }
-    .hamburger{ display:block; }
+    .nav-links{display:none;}
+    .nav-cta{display:none;}
+    .mobile-toggle{display:block;}
+    .mobile-menu{display:flex;}
   }
 
-  /* ---------- shared: buttons ---------- */
-  .btn-primary{ background:var(--gold); color:var(--ink); border:none; padding:16px 30px; font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase; font-weight:600; transition:transform .35s var(--ease), box-shadow .35s; }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px -8px rgba(201,162,39,0.55); }
-  .btn-ghost{ background:none; border:1px solid var(--line); color:var(--smoke); padding:15px 26px; font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase; transition:border-color .3s, color .3s; }
-  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold-light); }
-  .btn-wa{
-    display:inline-flex; align-items:center; justify-content:center; gap:10px; background:var(--wa); color:#08130d; border:none;
-    padding:16px 26px; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; transition:transform .35s var(--ease), background .3s;
+  /* ---------------- HERO ---------------- */
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;
+    background:linear-gradient(180deg, var(--ivory) 0%, var(--cream) 100%);
+    padding:140px 0 80px;
   }
-  .btn-wa:hover{ transform:translateY(-2px); background:var(--wa-light); }
-  .btn-wa svg{ width:17px; height:17px; }
-  .btn-wa.block{ width:100%; }
-  .btn-icon-sm{ background:none; border:1px solid var(--line); color:var(--smoke); width:38px; height:38px; display:flex; align-items:center; justify-content:center; transition:all .3s; flex-shrink:0; }
-  .btn-icon-sm:hover{ border-color:var(--gold); color:var(--gold-light); }
-  .btn-icon-sm svg{ width:15px; height:15px; }
-
-  /* ---------- HERO ---------- */
-  .hero{ position:relative; min-height:92svh; display:flex; align-items:center; padding:130px 32px 60px; overflow:hidden;
-    background: radial-gradient(ellipse at 78% 22%, rgba(201,162,39,0.16), transparent 55%), radial-gradient(ellipse at 15% 85%, rgba(138,28,52,0.09), transparent 50%), var(--bg); }
-  .hero-grid{ position:relative; z-index:3; width:100%; max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
-  .hero-eyebrow{ display:flex; align-items:center; gap:14px; margin-bottom:26px; opacity:0; animation:riseIn .9s var(--ease) .2s forwards; }
-  .hero-eyebrow .rule{ width:40px; height:1px; background:var(--gold); }
-  .hero h1{ font-family:'Fraunces', serif; font-weight:300; font-size:clamp(46px, 7.4vw, 104px); line-height:0.94; letter-spacing:-0.01em; opacity:0; transform:translateY(24px); animation:riseIn 1.1s var(--ease) .35s forwards; }
-  .hero h1 i{ font-style:italic; font-weight:400; color:var(--gold-light); }
-  .hero p.lede{ margin-top:26px; max-width:420px; font-size:16px; line-height:1.7; color:var(--smoke-dim); font-weight:300; opacity:0; transform:translateY(18px); animation:riseIn 1s var(--ease) .55s forwards; }
-  .hero-cta{ margin-top:38px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; opacity:0; transform:translateY(16px); animation:riseIn 1s var(--ease) .7s forwards; }
-  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
-
-  .hero-scene{ position:relative; height:520px; display:flex; align-items:center; justify-content:center; }
-  .hero-scene svg{ width:100%; max-width:320px; overflow:visible; }
-  .drip{ transform-origin:center; animation:drip 3.2s ease-in-out infinite; }
-  @keyframes drip{ 0%{ transform:translateY(-140px) scaleY(0.6); opacity:0;} 8%{opacity:1;} 46%{ transform:translateY(70px) scaleY(1); opacity:1;} 50%{ opacity:0; transform:translateY(78px) scaleY(0.4);} 100%{opacity:0;} }
-  .ripple{ transform-origin:center; animation:ripple 3.2s ease-out infinite; }
-  .ripple.r2{ animation-delay:.18s; }
-  @keyframes ripple{ 0%,44%{opacity:0; transform:scale(0.3);} 50%{opacity:0.55; transform:scale(0.5);} 78%{opacity:0; transform:scale(1.5);} 100%{opacity:0;} }
-  .liquid-fill{ animation:fillPulse 6s ease-in-out infinite; }
-  @keyframes fillPulse{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
-  .float-particle{ position:absolute; border-radius:50%; background:var(--gold-light); opacity:0.5; filter:blur(1px); animation:floatUp linear infinite; }
-  @keyframes floatUp{ 0%{transform:translateY(0) translateX(0); opacity:0;} 10%{opacity:0.6;} 90%{opacity:0.2;} 100%{transform:translateY(-420px) translateX(20px); opacity:0;} }
-  .scroll-cue{ position:absolute; bottom:30px; left:32px; display:flex; align-items:center; gap:10px; z-index:3; opacity:0; animation:riseIn 1s var(--ease) 1.1s forwards; }
-  .scroll-cue .line{ width:1px; height:44px; background:linear-gradient(var(--gold), transparent); position:relative; overflow:hidden;}
-  .scroll-cue .line::after{ content:''; position:absolute; top:-44px; left:0; width:100%; height:44px; background:var(--gold-light); animation:scrollLine 2.2s ease-in-out infinite; }
-  @keyframes scrollLine{ 0%{top:-44px;} 100%{top:44px;} }
-
-  /* ---------- MARQUEE ---------- */
-  .marquee-strip{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--surface-2); overflow:hidden; padding:16px 0; }
-  .marquee-track{ display:flex; width:max-content; animation:marquee 32s linear infinite; }
-  .marquee-track span{ font-family:'Fraunces', serif; font-style:italic; font-size:19px; color:var(--smoke-faint); padding:0 26px; white-space:nowrap; display:flex; align-items:center; gap:26px;}
-  .marquee-track span::after{ content:'✦'; color:var(--gold); font-style:normal; font-size:11px;}
-  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-
-  /* ---------- SECTION SHARED ---------- */
-  section{ position:relative; padding:120px 0; }
-  .section-head{ max-width:640px; margin-bottom:60px; }
-  .section-head .eyebrow{ margin-bottom:16px; display:block; }
-  .section-head h2{ font-family:'Fraunces', serif; font-weight:300; font-size:clamp(32px,4.4vw,52px); line-height:1.06; }
-  .section-head h2 i{ font-style:italic; color:var(--gold-light); font-weight:400; }
-  .section-head p{ margin-top:18px; color:var(--smoke-dim); font-size:15px; line-height:1.75; max-width:520px; font-weight:300; }
-  .reveal{ opacity:0; transform:translateY(36px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  /* ---------- PYRAMID ---------- */
-  .pyramid-section{ background:linear-gradient(180deg, var(--ink) 0%, var(--plum) 100%); }
-  .pyramid-wrap{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap:70px; align-items:center; }
-  .pyramid-visual{ position:relative; height:480px; }
-  .pyramid-visual svg{ width:100%; height:100%; overflow:visible; }
-  .tier-path{ transition:stroke-dashoffset 1s var(--ease); }
-  .smoke-plume{ opacity:0; transition:opacity .6s; }
-  .smoke-plume.active{ opacity:1; animation:plume 6s ease-in-out infinite; }
-  @keyframes plume{ 0%{transform:translateY(10px) scale(0.9); opacity:0;} 30%{opacity:0.35;} 70%{opacity:0.12;} 100%{transform:translateY(-90px) scale(1.4); opacity:0;} }
-  .tiers{ display:flex; flex-direction:column; gap:0; }
-  .tier{ padding:28px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:60px 1fr; gap:22px; opacity:0; transform:translateX(30px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-  .tier.in{ opacity:1; transform:translateX(0); }
-  .tier:last-child{ border-bottom:none; }
-  .tier .tag{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--gold); letter-spacing:0.1em; padding-top:4px; }
-  .tier h3{ font-family:'Fraunces', serif; font-size:23px; font-weight:450; margin-bottom:8px; }
-  .tier p{ color:var(--smoke-dim); font-size:14px; line-height:1.7; font-weight:300; margin-bottom:10px; }
-  .note-chips{ display:flex; flex-wrap:wrap; gap:8px; }
-  .note-chips span{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.04em; padding:5px 10px; border:1px solid var(--line); color:var(--smoke-dim); }
-
-  /* ---------- COLLECTION / PRODUCT GRID ---------- */
-  .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:44px; }
-  .filter-chip{ background:none; border:1px solid var(--line); color:var(--smoke-dim); padding:9px 18px; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; transition:all .3s var(--ease); }
-  .filter-chip:hover{ border-color:var(--gold); color:var(--smoke); }
-  .filter-chip.active{ background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:600; }
-  .product-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--line); }
-  .product-card{ background:var(--surface); padding:34px 28px 28px; display:flex; flex-direction:column; position:relative; transition:background .4s; opacity:0; transform:translateY(24px); cursor:pointer; }
-  .product-card.in{ opacity:1; transform:translateY(0); transition:opacity .7s var(--ease), transform .7s var(--ease), background .4s; }
-  .product-card:hover{ background:var(--surface-2); }
-  .product-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; }
-  .product-no{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--smoke-faint); }
-  .wishlist-btn{ background:none; border:none; color:var(--smoke-faint); transition:color .3s, transform .3s; z-index:2; }
-  .wishlist-btn svg{ width:16px; height:16px; }
-  .wishlist-btn.active{ color:var(--garnet); }
-  .wishlist-btn:hover{ transform:scale(1.15); }
-  .bottle-stage{ height:210px; display:flex; align-items:center; justify-content:center; margin:8px 0 16px; position:relative; }
-  .bottle-stage svg{ height:100%; transition:transform .55s var(--ease); }
-  .product-card:hover .bottle-stage svg{ transform:translateY(-8px) scale(1.04); }
-  .product-info .fam{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px; }
-  .product-info h3{ font-family:'Fraunces', serif; font-size:21px; font-weight:450; margin-bottom:6px; }
-  .stars-row{ display:flex; align-items:center; gap:6px; margin-bottom:10px; }
-  .stars{ display:flex; gap:2px; }
-  .stars svg{ width:12px; height:12px; }
-  .stars .rcount{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--smoke-faint); }
-  .product-info .desc{ font-size:13px; color:var(--smoke-dim); line-height:1.6; font-weight:300; margin-bottom:16px; min-height:40px; }
-  .product-bottom{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; gap:10px; }
-  .price{ font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--smoke); }
-  .card-actions{ display:flex; gap:8px; }
-  @media (max-width:960px){ .product-grid{ grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:620px){ .product-grid{ grid-template-columns:1fr;} }
-
-  /* ---------- CORRESPONDENCE preview on home ---------- */
-  .corr-section{ background:linear-gradient(180deg, var(--plum) 0%, var(--ink) 100%); }
-  .corr-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
-  .letter{ background:var(--surface-2); border:1px solid var(--line); padding:32px 26px; position:relative; opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-  .letter.in{ opacity:1; transform:translateY(0); }
-  .letter .stars{ margin-bottom:14px; }
-  .letter p.body{ font-family:'Fraunces', serif; font-style:italic; font-size:15.5px; line-height:1.7; color:var(--smoke); margin-bottom:20px; font-weight:400; }
-  .letter .sign{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--smoke-faint); letter-spacing:0.06em; }
-  @media (max-width:900px){ .corr-grid{ grid-template-columns:1fr; } }
-
-  /* ---------- ATELIER ---------- */
-  .atelier-section{ background:var(--surface); overflow:hidden; }
-  .atelier-scroll{ display:flex; gap:22px; overflow-x:auto; padding-bottom:20px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
-  .atelier-scroll::-webkit-scrollbar{ height:4px; }
-  .atelier-scroll::-webkit-scrollbar-thumb{ background:var(--gold); }
-  .atelier-card{ min-width:280px; scroll-snap-align:start; border:1px solid var(--line); padding:32px 24px; background:var(--surface-2); }
-  .atelier-card .num{ font-family:'JetBrains Mono',monospace; font-size:32px; color:var(--gold); opacity:0.5; margin-bottom:20px; }
-  .atelier-card h4{ font-family:'Fraunces', serif; font-size:20px; margin-bottom:10px; font-weight:450; }
-  .atelier-card p{ font-size:13px; color:var(--smoke-dim); line-height:1.7; font-weight:300; }
-
-  /* ---------- WHATSAPP CTA (home) ---------- */
-  .wa-cta-section{ background:var(--plum-2); text-align:center; padding:100px 32px; }
-  .wa-cta-section h2{ font-family:'Fraunces', serif; font-weight:300; font-size:clamp(30px,4vw,46px); margin-bottom:16px; }
-  .wa-cta-section h2 i{ font-style:italic; color:var(--gold-light); }
-  .wa-cta-section p{ color:var(--smoke-dim); max-width:460px; margin:0 auto 30px; font-size:14.5px; font-weight:300; }
-  .wa-number{ margin-top:22px; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--smoke-faint); }
-
-  /* ---------- FOOTER ---------- */
-  footer{ background:var(--surface); border-top:1px solid var(--line); padding:70px 32px 30px; }
-  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:60px; }
-  .footer-grid .brand{ margin-bottom:14px; }
-  .footer-grid p{ color:var(--smoke-dim); font-size:13.5px; line-height:1.7; max-width:280px; font-weight:300; }
-  .footer-col h5{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-light); margin-bottom:18px; }
-  .footer-col a{ display:block; font-size:13.5px; color:var(--smoke-dim); margin-bottom:11px; transition:color .3s; }
-  .footer-col a:hover{ color:var(--smoke); }
-  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:26px; font-size:12px; color:var(--smoke-faint); flex-wrap:wrap; gap:12px;}
-  @media (max-width:820px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
-
-  /* ---------- PRODUCT PAGE (amazon-style) ---------- */
-  .breadcrumb{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--smoke-faint); margin-bottom:34px; display:flex; gap:8px; flex-wrap:wrap; }
-  .breadcrumb a{ color:var(--smoke-dim); transition:color .3s; }
-  .breadcrumb a:hover{ color:var(--gold-light); }
-  .product-page-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
-  .pp-visual{ position:sticky; top:110px; background:radial-gradient(circle at 50% 30%, rgba(201,162,39,0.12), transparent 60%); border:1px solid var(--line); padding:40px; display:flex; flex-direction:column; align-items:center; gap:28px; }
-  .pp-visual svg.main-bottle{ height:340px; }
-  .pp-thumbs{ display:flex; gap:10px; }
-  .pp-thumb{ width:44px; height:44px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--smoke-dim); text-align:center; cursor:default; }
-  .pp-info .fam{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-light); margin-bottom:12px; }
-  .pp-info h1{ font-family:'Fraunces', serif; font-size:clamp(30px,3.6vw,44px); font-weight:450; margin-bottom:14px; line-height:1.05; }
-  .pp-info .stars-row{ margin-bottom:18px; }
-  .pp-price{ font-family:'JetBrains Mono',monospace; font-size:28px; margin-bottom:6px; }
-  .pp-stock{ font-size:12.5px; color:var(--wa-light); margin-bottom:24px; font-family:'JetBrains Mono',monospace; }
-  .pp-desc{ font-size:14.5px; line-height:1.8; color:var(--smoke-dim); font-weight:300; margin-bottom:28px; }
-  .pp-buybox{ border:1px solid var(--line); padding:26px; margin-bottom:30px; background:var(--surface-2); }
-  .qty-stepper{ display:flex; align-items:center; gap:0; border:1px solid var(--line); width:fit-content; margin-bottom:18px; }
-  .qty-stepper button{ background:none; border:none; color:var(--smoke); width:38px; height:38px; font-size:16px; }
-  .qty-stepper button:hover{ background:var(--surface); }
-  .qty-stepper span{ font-family:'JetBrains Mono',monospace; width:44px; text-align:center; font-size:14px; }
-  .pp-buy-actions{ display:flex; gap:12px; flex-wrap:wrap; }
-  .pp-buy-actions .btn-wa{ flex:1; min-width:200px; }
-  .pp-note{ font-size:12px; color:var(--smoke-faint); margin-top:14px; line-height:1.6; }
-  .pp-highlights{ list-style:none; margin-bottom:30px; }
-  .pp-highlights li{ font-size:13.5px; color:var(--smoke-dim); padding:9px 0; border-bottom:1px solid var(--line); display:flex; gap:10px; font-weight:300; }
-  .pp-highlights li::before{ content:'✦'; color:var(--gold); font-size:11px; }
-  .pp-block{ margin-bottom:40px; }
-  .pp-block h3{ font-family:'Fraunces', serif; font-size:20px; font-weight:450; margin-bottom:16px; }
-  .pp-notes-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
-  .pp-note-row{ display:flex; gap:16px; align-items:baseline; padding:12px 0; border-bottom:1px solid var(--line); }
-  .pp-note-row .lbl{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); min-width:56px; }
-  .related-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); margin-top:16px; }
-  @media (max-width:900px){ .product-page-grid{ grid-template-columns:1fr; gap:40px; } .pp-visual{ position:static; } .related-row{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:560px){ .related-row{ grid-template-columns:1fr; } }
-
-  /* ---------- WISHLIST PAGE ---------- */
-  .wishlist-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
-  .wishlist-empty{ text-align:center; padding:100px 20px; color:var(--smoke-dim); }
-  .wishlist-empty h3{ font-family:'Fraunces', serif; font-size:26px; margin-bottom:14px; font-weight:450; color:var(--smoke); }
-  .wishlist-toolbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; flex-wrap:wrap; gap:16px; }
-  @media (max-width:960px){ .wishlist-grid{ grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:620px){ .wishlist-grid{ grid-template-columns:1fr;} }
-
-  /* ---------- REVIEWS PAGE ---------- */
-  .reviews-overview{ display:flex; gap:60px; align-items:center; margin-bottom:60px; flex-wrap:wrap; border:1px solid var(--line); padding:36px; background:var(--surface-2); }
-  .reviews-overview .avg{ font-family:'Fraunces', serif; font-size:56px; font-weight:300; color:var(--gold-light); }
-  .reviews-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--line); margin-bottom:60px; }
-  .review-item{ background:var(--surface); padding:28px 26px; }
-  .review-item .top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-  .review-item .name{ font-family:'Fraunces', serif; font-size:15.5px; font-weight:450; }
-  .review-item .prod{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold-light); margin-bottom:10px; }
-  .review-item p{ font-size:13.5px; color:var(--smoke-dim); line-height:1.7; font-weight:300; }
-  @media (max-width:760px){ .reviews-list{ grid-template-columns:1fr; } }
-  .review-form{ border:1px solid var(--line); padding:34px; background:var(--surface-2); max-width:560px; }
-  .review-form h3{ font-family:'Fraunces', serif; font-size:22px; margin-bottom:22px; font-weight:450; }
-  .form-row{ margin-bottom:18px; }
-  .form-row label{ display:block; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--smoke-faint); margin-bottom:8px; }
-  .form-row input, .form-row textarea, .form-row select{ width:100%; background:var(--surface); border:1px solid var(--line); color:var(--smoke); padding:12px 14px; font-family:'Manrope',sans-serif; font-size:14px; outline:none; transition:border-color .3s; }
-  .form-row input:focus, .form-row textarea:focus, .form-row select:focus{ border-color:var(--gold); }
-  .form-row textarea{ resize:vertical; min-height:80px; }
-  .star-picker{ display:flex; gap:8px; }
-  .star-picker button{ background:none; border:none; color:var(--smoke-faint); }
-  .star-picker button.sel, .star-picker button:hover{ color:var(--gold); }
-  .star-picker svg{ width:22px; height:22px; }
-  .form-msg{ margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--wa-light); min-height:16px; }
-
-  /* ---------- SERVICES / FEATURES ---------- */
-  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); }
-  .info-card{ background:var(--surface); padding:38px 30px; }
-  .info-card .icon-wrap{ width:48px; height:48px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:22px; }
-  .info-card .icon-wrap svg{ width:20px; height:20px; color:var(--gold-light); }
-  .info-card h3{ font-family:'Fraunces', serif; font-size:20px; margin-bottom:12px; font-weight:450; }
-  .info-card p{ font-size:13.5px; color:var(--smoke-dim); line-height:1.7; font-weight:300; margin-bottom:18px; }
-  @media (max-width:900px){ .grid-3{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:600px){ .grid-3{ grid-template-columns:1fr; } }
-
-  /* ---------- CONTACT PAGE ---------- */
-  .contact-hero{ text-align:center; padding-bottom:70px; }
-  .contact-hero .btn-wa{ margin-top:10px; padding:20px 40px; font-size:14px; }
-  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--line); }
-  .contact-block{ background:var(--surface); padding:40px 34px; }
-  .contact-block h4{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-light); margin-bottom:16px; }
-  .contact-block .val{ font-family:'Fraunces', serif; font-size:20px; margin-bottom:8px; }
-  .contact-form-wrap{ margin-top:60px; max-width:600px; }
-  @media (max-width:760px){ .contact-grid{ grid-template-columns:1fr; } }
-
-  .toast{ position:fixed; bottom:28px; left:50%; transform:translate(-50%, 20px); background:var(--gold); color:var(--ink); padding:14px 24px; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.04em; z-index:1000; opacity:0; transition:all .4s var(--ease); pointer-events:none; text-align:center; max-width:90vw; }
-  .toast.show{ opacity:1; transform:translate(-50%, 0); }
-
-  [data-view]{ display:none; }
-  [data-view].active{ display:block; }
-
-  @media (max-width:900px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero-scene{ height:320px; }
-    .pyramid-wrap{ grid-template-columns:1fr; }
-    .pyramid-visual{ height:260px; }
-    section{ padding:80px 0; }
-    .wrap{ padding:0 20px; }
-    header.nav{ padding:16px 20px; }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:center;
+    max-width:1180px;margin:0 auto;padding:0 24px;
   }
-  @media (max-width:480px){
-    .hero{ padding:110px 16px 50px; }
-    .hero-cta{ flex-direction:column; align-items:stretch; }
-    .hero-cta .btn-primary, .hero-cta .btn-ghost{ text-align:center; }
+  .hero-eyebrow{margin-bottom:22px;}
+  .hero h1{font-size:clamp(40px,5.2vw,72px);font-weight:500;}
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hero p{
+    margin-top:24px;font-size:17px;line-height:1.6;color:var(--muted);max-width:440px;
+  }
+  .hero-ctas{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+  .hero-visual{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    aspect-ratio:4/5;
+  }
+  .hero-bottle-wrap{
+    animation:float 6s ease-in-out infinite;
+    width:70%;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-14px);}
+  }
+  .hero-visual .backdrop{
+    position:absolute;inset:6%;border-radius:4px;
+    background:radial-gradient(ellipse at 50% 40%, #FFFFFF 0%, var(--beige) 75%);
+  }
+
+  /* ---------------- SECTION SHELLS ---------------- */
+  .section{padding:110px 0;}
+  .section-cream{background:var(--cream);}
+  .section-beige{background:var(--beige);}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(30px,3.6vw,48px);margin-top:14px;}
+  .section-head p{margin-top:16px;color:var(--muted);font-size:16px;line-height:1.6;}
+
+  /* ---------------- SCENT BUILDER ---------------- */
+  .builder-cards{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  }
+  .builder-card{
+    background:var(--ivory);border:1px solid var(--border);border-radius:3px;
+    padding:34px 26px;cursor:pointer;
+    transition:border-color .3s ease, background .3s ease, transform .3s ease;
+  }
+  .builder-card:hover{transform:translateY(-4px);}
+  .builder-card.active{
+    border-color:var(--ink);background:var(--card);
+    box-shadow:inset 0 0 0 1px var(--ink);
+  }
+  .builder-card .num{font-size:11px;letter-spacing:0.14em;color:var(--gold);font-weight:600;}
+  .builder-card h3{font-size:23px;margin-top:16px;}
+  .builder-card p{margin-top:10px;font-size:14px;color:var(--muted);line-height:1.5;}
+
+  .builder-panel{
+    margin-top:56px;background:var(--card);border:1px solid var(--border);border-radius:3px;
+    padding:44px;
+    display:none;
+  }
+  .builder-panel.open{display:block;}
+  .builder-panel h4{font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:6px;}
+  .builder-panel .hint{font-size:14px;color:var(--muted);margin-bottom:26px;}
+
+  .pill-group{display:flex;flex-wrap:wrap;gap:10px;}
+  .pill{
+    padding:11px 20px;border-radius:30px;border:1px solid var(--border);
+    background:var(--ivory);font-size:13.5px;cursor:pointer;
+    transition:all .3s ease;
+    min-height:44px;display:flex;align-items:center;
+  }
+  .pill:hover{border-color:var(--ink);}
+  .pill.selected{background:var(--ink);color:var(--ivory);border-color:var(--ink);}
+
+  .form-row{margin-top:26px;}
+  .form-row label{display:block;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .form-row input, .form-row textarea{
+    width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:2px;
+    background:var(--ivory);font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);
+    min-height:48px;
+  }
+  .form-row textarea{min-height:96px;resize:vertical;}
+  .form-row input:focus, .form-row textarea:focus, .pill:focus-visible, .btn:focus-visible, a:focus-visible, .builder-card:focus-visible{
+    outline:2px solid var(--gold);outline-offset:2px;
+  }
+
+  /* ---------------- BOTTLES ---------------- */
+  .bottle-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .bottle-card{
+    background:var(--card);border:1px solid var(--border);border-radius:3px;
+    padding:44px 34px;text-align:center;position:relative;
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .bottle-card:hover{transform:translateY(-6px);}
+  .bottle-card.best{border-color:var(--gold);}
+  .bottle-badge{
+    position:absolute;top:20px;right:20px;font-size:10.5px;letter-spacing:0.12em;
+    background:var(--gold-soft);color:var(--gold);padding:6px 12px;border-radius:20px;font-weight:600;
+  }
+  .bottle-svg{width:96px;margin:0 auto 22px;}
+  .bottle-card h3{font-size:20px;letter-spacing:0.04em;}
+  .bottle-price{font-family:'Cormorant Garamond',serif;font-size:40px;margin-top:10px;}
+  .bottle-card .selectbtn{margin-top:22px;width:100%;}
+
+  /* ---------------- MOOD GRID ---------------- */
+  .mood-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  }
+  .mood-card{
+    aspect-ratio:3/4;border-radius:3px;overflow:hidden;position:relative;cursor:pointer;
+    border:1px solid var(--border);
+    isolation:isolate;
+  }
+  .mood-card .mood-bg{
+    position:absolute;inset:0;transition:transform .7s cubic-bezier(.22,1,.36,1);
+    background-size:220% 220%;
+    animation:moodDrift 14s ease-in-out infinite;
+  }
+  @keyframes moodDrift{
+    0%,100%{background-position:20% 20%;}
+    50%{background-position:80% 60%;}
+  }
+  .mood-card:hover .mood-bg{transform:scale(1.07);}
+  .mood-card .mood-sheen{
+    position:absolute;inset:0;
+    background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.55) 48%, transparent 62%);
+    background-size:260% 260%;
+    background-position:-40% -40%;
+    mix-blend-mode:soft-light;
+    opacity:0;
+    transition:opacity .5s ease;
+    pointer-events:none;
+  }
+  .mood-card:hover .mood-sheen{opacity:1;animation:sheenSweep 1.6s ease forwards;}
+  @keyframes sheenSweep{
+    0%{background-position:-60% -60%;}
+    100%{background-position:60% 60%;}
+  }
+  .mood-card .mood-icon{
+    position:absolute;top:18px;right:18px;width:26px;height:26px;opacity:0.85;
+    transition:transform .5s ease;
+  }
+  .mood-card:hover .mood-icon{transform:translateY(-3px) rotate(4deg);}
+  .mood-card .mood-vignette{
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse at 50% 100%, rgba(23,23,20,0.5) 0%, transparent 55%);
+  }
+  .mood-card .mood-label{
+    position:absolute;left:0;right:0;bottom:0;padding:20px;
+    background:linear-gradient(180deg, transparent 0%, rgba(23,23,20,0.55) 100%);
+  }
+  .mood-card .mood-label span{
+    font-family:'Cormorant Garamond',serif;color:#fff;font-size:19px;
+  }
+  .mood-card .mood-label small{
+    display:block;color:rgba(255,255,255,0.75);font-family:'Inter',sans-serif;
+    font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;
+  }
+
+  /* ---------------- ATTARS ---------------- */
+  .attar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .attar-card{
+    background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;
+    transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  }
+  .attar-card:hover{transform:translateY(-6px);box-shadow:0 22px 40px -24px rgba(23,23,20,0.35);}
+  .attar-visual{
+    aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+    background:var(--beige);
+  }
+  .attar-visual .attar-ring{
+    position:absolute;width:78%;height:78%;border-radius:50%;
+    border:1px solid rgba(179,145,95,0.45);
+    animation:ringSpin 26s linear infinite;
+  }
+  .attar-visual .attar-ring::before{
+    content:'';position:absolute;top:-3px;left:50%;width:6px;height:6px;margin-left:-3px;
+    background:var(--gold);border-radius:50%;
+  }
+  @keyframes ringSpin{ to{ transform:rotate(360deg); } }
+  .attar-visual .attar-glow{
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 42%, rgba(255,255,255,0.9) 0%, transparent 55%);
+    animation:glowPulse 5s ease-in-out infinite;
+  }
+  @keyframes glowPulse{
+    0%,100%{opacity:0.55;}
+    50%{opacity:1;}
+  }
+  .attar-visual svg{position:relative;z-index:2;}
+  .attar-info{padding:24px;}
+  .attar-info h3{font-size:20px;}
+  .attar-info .price{margin-top:8px;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+  .attar-cta{
+    margin-top:60px;text-align:center;
+  }
+
+  /* ---------------- HOW IT WORKS ---------------- */
+  .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .step{
+    padding:0 28px 0 0;border-left:1px solid var(--border);padding-left:28px;
+  }
+  .step:first-child{border-left:none;padding-left:0;}
+  .step .stepnum{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--gold);font-weight:400;}
+  .step h3{margin-top:16px;font-size:20px;}
+  .step p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.5;}
+  .steps-note{margin-top:56px;text-align:center;color:var(--muted);font-size:14px;letter-spacing:0.03em;}
+
+  /* ---------------- ORDER SUMMARY / WHATSAPP ---------------- */
+  .summary-box{
+    background:var(--card);border:1px solid var(--border);border-radius:3px;
+    padding:44px;max-width:640px;margin:0 auto;
+  }
+  .summary-row{
+    display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);
+    font-size:14.5px;
+  }
+  .summary-row:last-of-type{border-bottom:none;}
+  .summary-row .label{color:var(--muted);}
+  .summary-empty{color:var(--muted);font-size:14.5px;line-height:1.7;}
+
+  /* ---------------- ABOUT ---------------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .about-grid p{color:var(--muted);font-size:16px;line-height:1.75;margin-top:20px;}
+
+  /* ---------------- FOOTER ---------------- */
+  footer{background:var(--ink);color:var(--ivory);padding:70px 0 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  footer h4{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:16px;}
+  footer p{color:rgba(248,246,240,0.6);font-size:14px;line-height:1.7;max-width:320px;}
+  .footer-links a{display:block;padding:6px 0;font-size:14px;color:rgba(248,246,240,0.75);}
+  .footer-links a:hover{color:var(--ivory);}
+  .footer-bottom{
+    border-top:1px solid rgba(248,246,240,0.15);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-size:12.5px;color:rgba(248,246,240,0.5);
+  }
+
+  /* ---------------- STICKY MOBILE CTA ---------------- */
+  .sticky-cta{
+    display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
+    background:rgba(248,246,240,0.95);backdrop-filter:blur(10px);
+    border-top:1px solid var(--border);
+    padding:12px 16px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
+  }
+  .sticky-cta .btn{width:100%;}
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+    .hero{padding-top:120px;}
+    .hero-visual{order:-1;aspect-ratio:5/4;max-width:340px;margin:0 auto;}
+    .builder-cards{grid-template-columns:1fr 1fr;}
+    .bottle-grid{grid-template-columns:1fr;}
+    .mood-grid{grid-template-columns:1fr 1fr;}
+    .attar-grid{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr 1fr;row-gap:36px;}
+    .step{border-left:none;padding-left:0;padding-top:24px;border-top:1px solid var(--border);}
+    .step:first-child{border-top:none;padding-top:0;}
+    .about-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+  }
+  @media (max-width:600px){
+    .section{padding:72px 0;}
+    .builder-cards{grid-template-columns:1fr;}
+    .mood-grid{grid-template-columns:1fr 1fr;}
+    .attar-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .step{border-top:1px solid var(--border);padding-top:24px;}
+    .step:first-child{border-top:none;padding-top:0;}
+    .builder-panel{padding:26px;}
+    .hero-ctas{flex-direction:column;align-items:stretch;}
+    .hero-ctas .btn{width:100%;}
+    body{padding-bottom:76px;}
+    .sticky-cta{display:block;}
+    nav{padding:16px 20px;}
   }
 </style>
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <div class="brand" data-link="#/home">ALEEZ <em>PERFUMES</em></div>
-  <nav class="nav-links" id="navLinks">
-    <a href="#/home" data-route="home">Home</a>
-    <a href="#/home" data-route="shop" data-scroll="collection">Shop</a>
-    <a href="#/reviews" data-route="reviews">Reviews</a>
-    <a href="#/services" data-route="services">Services</a>
-    <a href="#/features" data-route="features">Features</a>
-    <a href="#/contact" data-route="contact">Contact</a>
+<!-- ================= NAV ================= -->
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="logo"><img class="mark" src="data:image/png;base64,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" alt="Aleez"> Aleez</a>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#builder">Create Your Scent</a>
+      <a href="#moods">Scents</a>
+      <a href="#attars">Attars</a>
+      <a href="#how">How It Works</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="nav-right">
+      <a class="icon-btn" href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+      </a>
+      <a class="nav-cta" href="https://wa.me/919345526905" target="_blank" rel="noopener">Order on WhatsApp</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
   </nav>
-  <div class="nav-actions">
-    <button class="icon-btn" id="wishlistNavBtn" aria-label="Wishlist" data-link="#/wishlist">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .7 6.4 3.3C14.4 4.7 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
-      <span class="badge-count" id="wishCount">0</span>
-    </button>
-    <a class="nav-wa-btn" id="navWaBtn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.7-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
-      <span>WhatsApp</span>
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
 </header>
 
-<!-- ================= HOME ================= -->
-<div data-view="home">
-  <section class="hero">
-    <div class="hero-glow" id="particleField" style="position:absolute; inset:0; z-index:1; pointer-events:none;"></div>
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow"><span class="rule"></span><span class="eyebrow">Est. in scent, not in sight</span></div>
-        <h1>Wear the<br><i>Unseen.</i></h1>
-        <p class="lede">Aleez is a house of eight fragrances, each built from a single true story and three layers of note — the part that greets, the part that stays, and the part that lingers on skin long after you've left the room.</p>
-        <div class="hero-cta">
-          <button class="btn-primary" data-scroll="collection">Explore the Collection</button>
-          <button class="btn-ghost" data-scroll="pyramid">How Aleez is built</button>
-        </div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#top">Home</a>
+  <a href="#builder">Create Your Scent</a>
+  <a href="#moods">Scents</a>
+  <a href="#attars">Attars</a>
+  <a href="#how">How It Works</a>
+  <a href="#about">About</a>
+  <a class="btn btn-dark mm-cta" href="https://wa.me/919345526905" target="_blank" rel="noopener">WhatsApp Us</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow hero-eyebrow reveal in">A CUSTOM FRAGRANCE STUDIO · CHENNAI</div>
+      <h1 class="reveal in">Your Scent.<br><em>Your Signature.</em></h1>
+      <p class="reveal in reveal-delay-1">Tell us the fragrance you love — or describe the one you've imagined. We'll create it for you.</p>
+      <div class="hero-ctas reveal in reveal-delay-2">
+        <a href="#builder" class="btn btn-dark">Create Your Scent</a>
+        <a href="https://wa.me/919345526905" target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2"/></svg>
+          WhatsApp Us
+        </a>
       </div>
-      <div class="hero-scene">
-        <svg viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="heroGoldGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e9c96b"/><stop offset="100%" stop-color="#8a1c34"/></linearGradient>
-            <linearGradient id="heroGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3a3038" stop-opacity="0.5"/><stop offset="100%" stop-color="#1a1418" stop-opacity="0.7"/></linearGradient>
-          </defs>
-          <rect x="60" y="80" width="80" height="180" rx="6" fill="url(#heroGlass)" stroke="#c9a227" stroke-opacity="0.4"/>
-          <rect class="liquid-fill" x="66" y="170" width="68" height="84" fill="url(#heroGoldGrad)" opacity="0.85"/>
-          <rect x="80" y="40" width="40" height="46" rx="4" fill="#161217" stroke="#c9a227" stroke-opacity="0.5"/>
-          <rect x="88" y="14" width="24" height="30" rx="3" fill="#0f0c0f" stroke="#c9a227" stroke-opacity="0.6"/>
-          <ellipse class="ripple" cx="100" cy="172" rx="20" ry="6" fill="none" stroke="#e9c96b" stroke-width="1"/>
-          <ellipse class="ripple r2" cx="100" cy="172" rx="20" ry="6" fill="none" stroke="#e9c96b" stroke-width="1"/>
-          <g class="drip"><circle cx="100" cy="0" r="4" fill="#e9c96b"/></g>
+    </div>
+    <div class="hero-visual reveal in reveal-delay-1">
+      <div class="backdrop"></div>
+      <div class="hero-bottle-wrap">
+        <svg viewBox="0 0 240 340" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="120" cy="322" rx="70" ry="12" fill="#DCD6C9" opacity="0.5"/>
+          <rect x="95" y="30" width="50" height="26" rx="4" fill="#171714"/>
+          <rect x="110" y="10" width="20" height="26" rx="3" fill="#B3915F"/>
+          <path d="M80 56 Q80 50 90 50 L150 50 Q160 50 160 56 L172 110 Q176 130 176 150 L176 290 Q176 310 156 310 L84 310 Q64 310 64 290 L64 150 Q64 130 68 110 Z"
+                fill="#ffffff" stroke="#DCD6C9" stroke-width="1.5" opacity="0.9"/>
+          <path d="M80 56 Q80 50 90 50 L150 50 Q160 50 160 56 L172 110 Q176 130 176 150 L176 290 Q176 310 156 310 L120 310 L120 50Z"
+                fill="#F8F6F0" opacity="0.6"/>
+          <rect x="86" y="150" width="68" height="82" rx="2" fill="none" stroke="#B3915F" stroke-width="1" opacity="0.55"/>
+          <text x="120" y="185" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="15" fill="#68645C" letter-spacing="2">ALEEZ</text>
+          <text x="120" y="203" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#B3915F" letter-spacing="3">PARFUM</text>
+          <rect x="150" y="140" width="6" height="140" fill="#ffffff" opacity="0.5"/>
         </svg>
       </div>
     </div>
-    <div class="scroll-cue"><div class="line"></div><span class="mono" style="font-size:10px; color:var(--smoke-faint);">SCROLL</span></div>
-  </section>
+  </div>
+</section>
 
-  <div class="marquee-strip"><div class="marquee-track" id="marqueeTrack"></div></div>
+<!-- ================= CREATE YOUR SCENT ================= -->
+<section class="section" id="builder">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">CREATE YOUR SCENT</div>
+      <h2>What do you want to smell like?</h2>
+      <p>Start with a fragrance you already love, or build something completely your own.</p>
+    </div>
 
-  <section class="pyramid-section" id="pyramid">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Composition</span>
-        <h2>Every Aleez bottle<br>is <i>three decisions,</i><br>not one.</h2>
-        <p>A fragrance isn't a single smell — it's a sequence unfolding on skin. Top notes greet a stranger in the first ten minutes; heart notes carry the actual character for hours; base notes are what someone remembers on your scarf the next morning.</p>
+    <div class="builder-cards">
+      <div class="builder-card reveal reveal-delay-1" data-panel="inspired" tabindex="0" role="button">
+        <div class="num">01</div>
+        <h3>Inspired by a fragrance</h3>
+        <p>Tell us the perfume you love.</p>
       </div>
-      <div class="pyramid-wrap">
-        <div class="pyramid-visual" id="pyramidVisual">
-          <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
-            <defs><radialGradient id="plumeGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e9c96b" stop-opacity="0.5"/><stop offset="100%" stop-color="#e9c96b" stop-opacity="0"/></radialGradient></defs>
-            <path class="tier-path" id="tpath1" d="M50 70 L270 70" stroke="#c9a227" stroke-width="1.4" fill="none"/>
-            <path class="tier-path" id="tpath2" d="M50 215 L270 215" stroke="#c9a227" stroke-width="1.4" fill="none"/>
-            <path class="tier-path" id="tpath3" d="M50 360 L270 360" stroke="#c9a227" stroke-width="1.4" fill="none"/>
-            <circle class="smoke-plume" id="plume1" cx="90" cy="70" r="24" fill="url(#plumeGrad)"/>
-            <circle class="smoke-plume" id="plume2" cx="170" cy="215" r="32" fill="url(#plumeGrad)"/>
-            <circle class="smoke-plume" id="plume3" cx="130" cy="360" r="28" fill="url(#plumeGrad)"/>
-            <circle cx="50" cy="70" r="3.5" fill="#e9c96b"/><circle cx="50" cy="215" r="3.5" fill="#e9c96b"/><circle cx="50" cy="360" r="3.5" fill="#e9c96b"/>
-          </svg>
-        </div>
-        <div class="tiers" id="tiersList">
-          <div class="tier" data-tier="1"><div class="tag">01 / TOP</div><div><h3>The first ten minutes</h3><p>Bright, volatile molecules that lift off skin immediately — the handshake before the conversation starts.</p><div class="note-chips"><span>Bergamot</span><span>Saffron</span><span>Pink Pepper</span><span>Green Mandarin</span></div></div></div>
-          <div class="tier" data-tier="2"><div class="tag">02 / HEART</div><div><h3>The next six hours</h3><p>Once the top fades, this is the actual scent people associate with you — rounder, warmer, slower to arrive.</p><div class="note-chips"><span>Rose</span><span>Oud</span><span>Jasmine</span><span>Tobacco Leaf</span></div></div></div>
-          <div class="tier" data-tier="3"><div class="tag">03 / BASE</div><div><h3>What stays on the scarf</h3><p>Heavy, slow molecules that anchor everything above them and outlast the rest by hours, sometimes a full day.</p><div class="note-chips"><span>Amber</span><span>Musk</span><span>Sandalwood</span><span>Labdanum</span></div></div></div>
-        </div>
+      <div class="builder-card reveal reveal-delay-2" data-panel="custom" tabindex="0" role="button">
+        <div class="num">02</div>
+        <h3>Create my own</h3>
+        <p>Choose the notes and vibe.</p>
+      </div>
+      <div class="builder-card reveal reveal-delay-3" data-panel="recommend" tabindex="0" role="button">
+        <div class="num">03</div>
+        <h3>Recommend one for me</h3>
+        <p>Tell us what you like and we'll help.</p>
+      </div>
+      <div class="builder-card reveal reveal-delay-4" data-panel="attar" tabindex="0" role="button">
+        <div class="num">04</div>
+        <h3>Attar</h3>
+        <p>Explore concentrated fragrance oils.</p>
       </div>
     </div>
-  </section>
 
-  <section id="collection">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">The Catalogue</span>
-        <h2>Eight fragrances,<br>numbered like <i>a ledger.</i></h2>
-        <p>Every Aleez release is numbered in the order it was composed. Tap any bottle to open its full page — notes, reviews, and a direct line to order on WhatsApp.</p>
+    <!-- Panel: inspired -->
+    <div class="builder-panel" id="panel-inspired">
+      <h4>Inspired by a fragrance</h4>
+      <p class="hint">Name the perfume you love — we'll build our own interpretation of it.</p>
+      <div class="form-row">
+        <label for="inspiredName">Fragrance name</label>
+        <input type="text" id="inspiredName" placeholder="e.g. Bleu de Chanel, Baccarat Rouge 540...">
       </div>
-      <div class="filters" id="filters"></div>
-      <div class="product-grid" id="productGrid"></div>
-    </div>
-  </section>
-
-  <section class="corr-section">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Correspondence</span>
-        <h2>Notes from<br>the <i>wearers.</i></h2>
-      </div>
-      <div class="corr-grid" id="corrGrid"></div>
-      <div class="reveal" style="margin-top:44px;"><a class="btn-ghost" href="#/reviews">Read All Reviews →</a></div>
-    </div>
-  </section>
-
-  <section class="atelier-section">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Sourcing</span>
-        <h2>Where the<br>raw materials <i>come from.</i></h2>
-        <p>Scroll sideways — this is the part of the process most houses don't show.</p>
+      <div class="form-row">
+        <label for="inspiredNotes">Anything you'd like adjusted?</label>
+        <textarea id="inspiredNotes" placeholder="Sweeter, longer-lasting, less smoky, more fresh..."></textarea>
       </div>
     </div>
-    <div class="wrap"><div class="atelier-scroll" id="atelierScroll"></div></div>
-  </section>
 
-  <section class="wa-cta-section">
-    <div class="eyebrow" style="margin-bottom:18px;">Talk To Us Directly</div>
-    <h2>Every order is placed<br>by <i>a real conversation.</i></h2>
-    <p>Aleez doesn't run an automated checkout. Message us on WhatsApp with what you'd like, and we'll confirm availability, shipping, and payment directly with you.</p>
-    <a class="btn-wa" id="homeWaCta" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.7-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
-      <span>Message Us on WhatsApp</span>
-    </a>
-    <div class="wa-number mono">+91 93455 26905</div>
-  </section>
-</div>
-
-<!-- ================= PRODUCT PAGE ================= -->
-<div data-view="product">
-  <section style="padding-top:150px;">
-    <div class="wrap" id="productPageRoot"></div>
-  </section>
-</div>
-
-<!-- ================= WISHLIST PAGE ================= -->
-<div data-view="wishlist">
-  <section style="padding-top:150px;">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Saved</span>
-        <h2>Your <i>Wishlist.</i></h2>
-        <p>Saved on this device. Ready whenever you want to order — nothing here is charged automatically.</p>
-      </div>
-      <div id="wishlistRoot"></div>
-    </div>
-  </section>
-</div>
-
-<!-- ================= REVIEWS PAGE ================= -->
-<div data-view="reviews">
-  <section style="padding-top:150px;">
-    <div class="wrap" id="reviewsRoot"></div>
-  </section>
-</div>
-
-<!-- ================= SERVICES PAGE ================= -->
-<div data-view="services">
-  <section style="padding-top:150px;">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">What We Offer</span>
-        <h2>Beyond the <i>bottle.</i></h2>
-        <p>Every service below is handled personally, over WhatsApp — no ticketing system, no bots.</p>
-      </div>
-      <div class="grid-3" id="servicesRoot"></div>
-    </div>
-  </section>
-</div>
-
-<!-- ================= FEATURES PAGE ================= -->
-<div data-view="features">
-  <section style="padding-top:150px;">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Why Aleez</span>
-        <h2>Built <i>differently,</i><br>on purpose.</h2>
-      </div>
-      <div class="grid-3" id="featuresRoot"></div>
-    </div>
-  </section>
-</div>
-
-<!-- ================= CONTACT PAGE ================= -->
-<div data-view="contact">
-  <section style="padding-top:150px;">
-    <div class="wrap">
-      <div class="contact-hero page-fade">
-        <span class="eyebrow">Get In Touch</span>
-        <h2 class="serif" style="font-weight:300; font-size:clamp(30px,4vw,46px); margin:16px 0 14px;">Fastest way to<br><i style="font-style:italic; color:var(--gold-light);">reach the atelier.</i></h2>
-        <p style="color:var(--smoke-dim); max-width:460px; margin:0 auto 28px; font-size:14.5px; font-weight:300;">We reply on WhatsApp within a few hours, every day. It's the only channel we use for orders and questions alike.</p>
-        <a class="btn-wa" id="contactWaBtn" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.7-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
-          <span>Chat on WhatsApp</span>
-        </a>
-        <div class="wa-number mono">+91 93455 26905</div>
-      </div>
-      <div class="contact-grid page-fade">
-        <div class="contact-block"><h4>Email</h4><div class="val">atelier@aleezperfumes.com</div><p style="color:var(--smoke-dim); font-size:13px; font-weight:300;">For press and partnerships only — orders go through WhatsApp.</p></div>
-        <div class="contact-block"><h4>Studio</h4><div class="val">Chennai, India</div><p style="color:var(--smoke-dim); font-size:13px; font-weight:300;">Ships pan-India. No walk-in retail at this time.</p></div>
-      </div>
-      <div class="contact-form-wrap page-fade">
-        <div class="review-form" style="max-width:none;">
-          <h3>Send a message</h3>
-          <p style="color:var(--smoke-dim); font-size:13px; margin-bottom:22px; font-weight:300;">Fill this in and it opens WhatsApp with your message ready to send — nothing is stored or emailed from here.</p>
-          <form id="contactForm">
-            <div class="form-row"><label>Name</label><input type="text" id="cfName" required></div>
-            <div class="form-row"><label>Message</label><textarea id="cfMsg" required placeholder="I'd like to ask about..."></textarea></div>
-            <button type="submit" class="btn-wa block">
-              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.7-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
-              <span>Open WhatsApp with this message</span>
-            </button>
-          </form>
-        </div>
+    <!-- Panel: custom -->
+    <div class="builder-panel" id="panel-custom">
+      <h4>Create my own</h4>
+      <p class="hint">Select the notes that speak to you. Choose as many as you like.</p>
+      <div class="pill-group" id="noteGroup">
+        <button class="pill" data-note="Fresh">Fresh</button>
+        <button class="pill" data-note="Citrus">Citrus</button>
+        <button class="pill" data-note="Aquatic">Aquatic</button>
+        <button class="pill" data-note="Vanilla">Vanilla</button>
+        <button class="pill" data-note="Oud">Oud</button>
+        <button class="pill" data-note="Musk">Musk</button>
+        <button class="pill" data-note="Amber">Amber</button>
+        <button class="pill" data-note="Rose">Rose</button>
+        <button class="pill" data-note="Tobacco">Tobacco</button>
+        <button class="pill" data-note="Woody">Woody</button>
+        <button class="pill" data-note="Floral">Floral</button>
+        <button class="pill" data-note="Sweet">Sweet</button>
+        <button class="pill" data-note="Leather">Leather</button>
+        <button class="pill" data-note="Sandalwood">Sandalwood</button>
       </div>
     </div>
-  </section>
-</div>
 
+    <!-- Panel: recommend -->
+    <div class="builder-panel" id="panel-recommend">
+      <h4>Recommend one for me</h4>
+      <p class="hint">Tell us a little about your taste and we'll suggest a direction.</p>
+      <div class="form-row">
+        <label for="recDesc">What do you usually like?</label>
+        <textarea id="recDesc" placeholder="e.g. I like warm, cozy scents, not too sweet, worn mostly in winter evenings..."></textarea>
+      </div>
+    </div>
+
+    <!-- Panel: attar -->
+    <div class="builder-panel" id="panel-attar">
+      <h4>Attar</h4>
+      <p class="hint">Concentrated, oil-based fragrance in the traditional style.</p>
+      <div class="pill-group" id="attarNoteGroup">
+        <button class="pill" data-note="Oud Attar">Oud</button>
+        <button class="pill" data-note="Musk Attar">Musk</button>
+        <button class="pill" data-note="Rose Attar">Rose</button>
+        <button class="pill" data-note="Amber Attar">Amber</button>
+        <button class="pill" data-note="Sandalwood Attar">Sandalwood</button>
+        <button class="pill" data-note="Fresh Attar">Fresh</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOTTLE SIZE ================= -->
+<section class="section section-beige" id="bottles">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">BOTTLE SIZE</div>
+      <h2>Choose Your Bottle</h2>
+    </div>
+    <div class="bottle-grid">
+      <div class="bottle-card reveal reveal-delay-1" data-size="50ML" data-price="₹599">
+        <svg class="bottle-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="38" y="10" width="24" height="14" rx="3" fill="#171714"/>
+          <path d="M32 24 Q32 20 38 20 L62 20 Q68 20 68 24 L74 50 Q76 60 76 68 L76 122 Q76 132 66 132 L34 132 Q24 132 24 122 L24 68 Q24 60 26 50 Z" fill="#ffffff" stroke="#DCD6C9" stroke-width="1.4"/>
+          <rect x="32" y="66" width="36" height="34" rx="1.5" fill="none" stroke="#B3915F" stroke-width="0.8" opacity="0.6"/>
+        </svg>
+        <h3>50 ML</h3>
+        <div class="bottle-price">₹599</div>
+        <button class="btn btn-outline selectbtn" data-select-bottle="50ML">Select 50 ML</button>
+      </div>
+      <div class="bottle-card best reveal reveal-delay-2" data-size="100ML" data-price="₹999">
+        <div class="bottle-badge">BEST VALUE</div>
+        <svg class="bottle-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="34" y="6" width="32" height="16" rx="3" fill="#171714"/>
+          <path d="M26 22 Q26 17 34 17 L66 17 Q74 17 74 22 L82 52 Q85 64 85 74 L85 128 Q85 136 74 136 L26 136 Q15 136 15 128 L15 74 Q15 64 18 52 Z" fill="#ffffff" stroke="#DCD6C9" stroke-width="1.4"/>
+          <rect x="24" y="70" width="52" height="38" rx="1.5" fill="none" stroke="#B3915F" stroke-width="0.8" opacity="0.6"/>
+        </svg>
+        <h3>100 ML</h3>
+        <div class="bottle-price">₹999</div>
+        <button class="btn btn-dark selectbtn" data-select-bottle="100ML">Select 100 ML</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIND YOUR DIRECTION ================= -->
+<section class="section" id="moods">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">POPULAR SCENTS</div>
+      <h2>Find Your Direction</h2>
+      <p>Not sure what to ask for? Start with a mood.</p>
+    </div>
+    <div class="mood-grid" id="moodGrid">
+      <!-- generated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= ATTARS ================= -->
+<section class="section section-cream" id="attars">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">THE ATTAR COLLECTION</div>
+      <h2>Traditional fragrance. Made personal.</h2>
+    </div>
+    <div class="attar-grid" id="attarGrid"></div>
+    <div class="attar-cta reveal">
+      <a href="https://wa.me/919345526905" target="_blank" rel="noopener" class="btn btn-dark">Ask on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">HOW IT WORKS</div>
+      <h2>From idea to bottle.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal reveal-delay-1"><div class="stepnum">01</div><h3>Tell us your scent</h3><p>Inspired, custom, guided, or attar — start however feels right.</p></div>
+      <div class="step reveal reveal-delay-2"><div class="stepnum">02</div><h3>Choose your bottle</h3><p>50 ML or 100 ML, priced simply, no hidden extras.</p></div>
+      <div class="step reveal reveal-delay-3"><div class="stepnum">03</div><h3>Confirm on WhatsApp</h3><p>Review your request and confirm the details with us directly.</p></div>
+      <div class="step reveal reveal-delay-4"><div class="stepnum">04</div><h3>We create & deliver</h3><p>Your fragrance is made and delivered in about 7 days.</p></div>
+    </div>
+    <div class="steps-note reveal">Delivery typically takes around 7 days from confirmation.</div>
+  </div>
+</section>
+
+<!-- ================= WHATSAPP ORDER SUMMARY ================= -->
+<section class="section section-beige" id="order">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">YOUR REQUEST</div>
+      <h2>Send it to us on WhatsApp</h2>
+      <p>Here's what you've chosen so far. Add your bottle size and scent details above, then send it across.</p>
+    </div>
+    <div class="summary-box reveal" id="summaryBox">
+      <p class="summary-empty" id="summaryEmpty">Nothing selected yet — choose a scent path above and a bottle size to build your request.</p>
+      <div id="summaryContent" style="display:none;">
+        <div class="summary-row"><span class="label">Scent path</span><span id="sumPath">—</span></div>
+        <div class="summary-row"><span class="label">Details</span><span id="sumDetails">—</span></div>
+        <div class="summary-row"><span class="label">Bottle</span><span id="sumBottle">—</span></div>
+        <div class="summary-row"><span class="label">Price</span><span id="sumPrice">—</span></div>
+      </div>
+      <a href="https://wa.me/919345526905" id="sendWhatsapp" target="_blank" rel="noopener" class="btn btn-dark" style="width:100%;margin-top:28px;">Send Request on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="eyebrow">ABOUT ALEEZ</div>
+        <h2 style="font-size:clamp(28px,3.4vw,42px);margin-top:14px;">A fragrance that's<br>actually yours.</h2>
+        <p>Aleez Perfumes is a small, independent fragrance studio based in Chennai. We didn't want to be another catalogue of ready-made bottles — so we built a studio where you describe the scent, and we make it.</p>
+        <p>Every order is made to order, from a fragrance you already love or a feeling you're trying to put into words. No mass production, no filler notes — just a scent that's yours.</p>
+      </div>
+      <div class="reveal reveal-delay-1" style="aspect-ratio:4/5;background:radial-gradient(ellipse at 50% 40%, #FFFFFF 0%, var(--beige) 100%);border-radius:3px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);">
+        <img src="data:image/png;base64,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" alt="Aleez AZ monogram" style="width:38%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
 <footer>
-  <div class="wrap">
+  <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="brand">ALEEZ <em>PERFUMES</em></div>
-        <p>An independent perfume house composing fragrance in three deliberate layers. Every order confirmed personally over WhatsApp.</p>
+        <h4>Aleez Perfumes</h4>
+        <p>A custom fragrance studio in Chennai. Tell us what scent you want, and we'll create it — bespoke, made to order, delivered in about 7 days.</p>
       </div>
-      <div class="footer-col">
-        <h5>Shop</h5>
-        <a href="#/home" data-scroll="collection">Full Collection</a>
-        <a href="#/wishlist">Wishlist</a>
-        <a href="#/reviews">Reviews</a>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="#builder">Create Your Scent</a>
+        <a href="#moods">Scents</a>
+        <a href="#attars">Attars</a>
+        <a href="#how">How It Works</a>
       </div>
-      <div class="footer-col">
-        <h5>House</h5>
-        <a href="#/services">Services</a>
-        <a href="#/features">Features</a>
-        <a href="#/home" data-scroll="pyramid">How We Compose</a>
-      </div>
-      <div class="footer-col">
-        <h5>Reach</h5>
-        <a href="#/contact">Contact</a>
-        <a href="mailto:atelier@aleezperfumes.com">atelier@aleezperfumes.com</a>
-        <a id="footerWaLink" target="_blank" rel="noopener">WhatsApp: +91 93455 26905</a>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="https://wa.me/919345526905" target="_blank" rel="noopener">WhatsApp: +91 93455 26905</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="#top">Chennai, India</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Aleez Perfumes. All fragrances composed in-house.</span>
-      <span class="mono">NO.01 — NO.08 IN CIRCULATION</span>
+      <span>© 2026 Aleez Perfumes. All rights reserved.</span>
+      <span>Made to order, always.</span>
     </div>
   </div>
 </footer>
 
-<div class="toast" id="toast"></div>
+<!-- ================= STICKY MOBILE CTA ================= -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#builder" class="btn btn-dark">Create Your Scent</a>
+</div>
 
 <script>
 (function(){
-  "use strict";
-
-  const WA_NUMBER = "919345526905";
-  function waLink(text){ return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text); }
-
-  /* ---------------- DATA ---------------- */
-  const products = [
-    { id:1, name:"Oud Noir", fam:"Oud & Amber", top:["Saffron","Pink Pepper"], heart:["Rose","Oud"], base:["Amber","Musk"], price:6900, colorA:"#8a1c34", colorB:"#c9a227", desc:"A dark rose wrapped in raw oud smoke — the house's founding scent.", highlights:["8–10 hour wear on skin","Best for evening and cooler weather","Sillage: strong, projects well"] },
-    { id:2, name:"Velvet Rose", fam:"Floral", top:["Bergamot","Litchi"], heart:["Rose","Peony"], base:["Sandalwood","Musk"], price:5400, colorA:"#b23a5e", colorB:"#e9c96b", desc:"Rose without the powder — bright, a little green, never sweet.", highlights:["6–8 hour wear on skin","Best for daytime and office wear","Sillage: moderate, close to skin"] },
-    { id:3, name:"Saffron Smoke", fam:"Oriental", top:["Saffron","Cardamom"], heart:["Incense","Leather"], base:["Oud","Vanilla"], price:7200, colorA:"#a2401f", colorB:"#c9a227", desc:"Built around a single burning ember of saffron and church incense.", highlights:["10+ hour wear on skin","Best for winter evenings","Sillage: very strong, use sparingly"] },
-    { id:4, name:"Citrus Verde", fam:"Citrus & Green", top:["Bergamot","Green Mandarin"], heart:["Fig Leaf","Basil"], base:["Vetiver","Musk"], price:4800, colorA:"#22403f", colorB:"#8fbf9f", desc:"Cold-pressed citrus over crushed fig leaf — Aleez's only truly light scent.", highlights:["4–6 hour wear on skin","Best for daytime, summer, humid weather","Sillage: light, refreshing"] },
-    { id:5, name:"White Musk", fam:"Musk", top:["Pear","White Tea"], heart:["Jasmine","Musk"], base:["Cedarwood","Ambrette"], price:5100, colorA:"#8f887c", colorB:"#f3ede2", desc:"Skin-close and quiet — the one you wear when you don't want to be asked what it is.", highlights:["6–8 hour wear on skin","Best for everyday, unisex wear","Sillage: soft, intimate"] },
-    { id:6, name:"Leather & Tobacco", fam:"Woody", top:["Black Pepper","Cardamom"], heart:["Tobacco Leaf","Leather"], base:["Oud","Dark Amber"], price:7600, colorA:"#4a2e1a", colorB:"#c9a227", desc:"A worn leather jacket and an ashtray from three nights ago, made elegant.", highlights:["9–10 hour wear on skin","Best for autumn/winter evenings","Sillage: strong, bold statement"] },
-    { id:7, name:"Midnight Fig", fam:"Gourmand", top:["Fig","Bergamot"], heart:["Coconut","Milk"], base:["Sandalwood","Vanilla"], price:5900, colorA:"#331623", colorB:"#e9c96b", desc:"Fig picked at night, milk, and warm sandalwood — comfort without being sweet.", highlights:["6–7 hour wear on skin","Best for casual and evening wear","Sillage: moderate, cosy"] },
-    { id:8, name:"Gold Amber", fam:"Amber", top:["Mandarin","Saffron"], heart:["Amber","Honey"], base:["Labdanum","Musk"], price:6300, colorA:"#c9a227", colorB:"#8a1c34", desc:"Amber pushed to its warmest, honeyed edge. The most-worn scent in the house.", highlights:["8 hour wear on skin","Best for all seasons, signature scent","Sillage: moderate to strong"] }
-  ];
-  const FAMILIES = ["All", ...new Set(products.map(p=>p.fam))];
-
-  const defaultReviews = [
-    { id:"d1", productId:1, name:"A.R., Bangalore", rating:5, text:"I wore Oud Noir to a funeral by accident — it was still the right choice. That's when I understood what this house is doing." },
-    { id:"d2", productId:1, name:"S.K., Delhi", rating:4, text:"Heavier than I expected on first spray, but it settles into something genuinely beautiful after an hour." },
-    { id:"d3", productId:3, name:"K.M., Mumbai", rating:5, text:"Saffron Smoke doesn't behave like a perfume. It behaves like a room you just walked into." },
-    { id:"d4", productId:5, name:"P.S., Chennai", rating:5, text:"White Musk is the first scent I've owned that people notice on me, not on the air around me." },
-    { id:"d5", productId:2, name:"N.I., Hyderabad", rating:4, text:"Velvet Rose is what I reach for on days I don't want to explain what I'm wearing. It just works." },
-    { id:"d6", productId:4, name:"R.T., Pune", rating:4, text:"Citrus Verde is the only fragrance that survives Chennai humidity without turning cloying." },
-    { id:"d7", productId:6, name:"V.J., Kolkata", rating:5, text:"Leather & Tobacco got me three separate compliments in one evening. Not subtle, not trying to be." },
-    { id:"d8", productId:7, name:"M.A., Ahmedabad", rating:4, text:"Midnight Fig smells expensive without smelling like everyone else's idea of expensive." },
-    { id:"d9", productId:8, name:"D.P., Chennai", rating:5, text:"Gold Amber is the one I keep replacing. Warm, easy, never overdone." },
-    { id:"d10", productId:3, name:"L.F., Bangalore", rating:5, text:"Ordered over WhatsApp, had it in four days, the perfumer herself answered my questions about longevity." }
-  ];
-
-  const services = [
-    { icon:"chat", title:"Personal Scent Matching", body:"Tell us your skin type, climate and the fragrances you already like — we'll recommend from the eight before you buy anything.", cta:"Ask for a recommendation" },
-    { icon:"gift", title:"Gifting & Corporate Orders", body:"Bulk orders for weddings, corporate gifting or events, with custom notes cards on request. Discounts scale with quantity.", cta:"Enquire about bulk pricing" },
-    { icon:"truck", title:"Pan-India Shipping", body:"Dispatched from Chennai within 2 business days, delivered in 4–6 days nationwide. Cash on delivery available in most cities.", cta:"Ask about delivery to my city" },
-    { icon:"refresh", title:"Refill Program", body:"Bring back an empty 50ml Aleez bottle and refill it at 20% off the listed price — better for your shelf and for us.", cta:"Ask about the refill program" },
-    { icon:"flask", title:"Sample Sets", body:"Not sure which of the eight is yours? A five-vial discovery set is available before you commit to a full bottle.", cta:"Ask about sample sets" },
-    { icon:"heart", title:"Fragrance Layering Advice", body:"Some Aleez scents are built to be layered — we'll tell you honestly which pairs work and which don't.", cta:"Ask about layering" }
-  ];
-
-  const features = [
-    { icon:"layers", title:"Three-Layer Construction", body:"Every fragrance is composed in top, heart and base — never a single flat accord sprayed from one note." },
-    { icon:"clock", title:"Small-Batch, In-House", body:"We compose in batches under 200 bottles at a time, so nothing sits half-finished on a shelf for a year." },
-    { icon:"leaf", title:"Sourced Responsibly", body:"Sandalwood from certified replanted groves, oud from small distillers we've worked with since bottle one." },
-    { icon:"shield", title:"Cruelty-Free", body:"No animal testing at any stage, on any Aleez fragrance, ever." },
-    { icon:"package", title:"Protective Packaging", body:"Every bottle ships in a foam-lined, glass-safe box — breakages are rare, and we replace them without argument." },
-    { icon:"user", title:"A Human on the Other End", body:"No chatbot, no ticket number. The person who replies on WhatsApp is the same person who composed the scent." }
-  ];
-
-  const atelier = [
-    { num:"01", title:"Mysore Sandalwood", body:"Sourced from certified replanted groves — Mysore sandalwood is the backbone of three of our base accords." },
-    { num:"02", title:"Kashmiri Saffron", body:"Hand-picked stigmas, three per flower, dried within hours of harvest to keep the note sharp rather than hay-like." },
-    { num:"03", title:"Assam Oud", body:"Aged agarwood distilled in small batches — no two lots smell identical, which is exactly why we use it." },
-    { num:"04", title:"Grasse Rose Absolute", body:"Old-world extraction from a single cooperative we've worked with since the house's first bottle." },
-    { num:"05", title:"Sri Lankan Cardamom", body:"Green cardamom pods, cold-distilled to keep the top note bright instead of curry-warm." }
-  ];
-
-  const ICONS = {
-    chat:'<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
-    gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v9H5v-9M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
-    truck:'<rect x="1" y="6" width="15" height="11"/><path d="M16 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/>',
-    refresh:'<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/>',
-    flask:'<path d="M9 2v6L3.5 18a2 2 0 0 0 1.7 3h13.6a2 2 0 0 0 1.7-3L15 8V2"/><path d="M9 2h6"/><path d="M7.5 14h9"/>',
-    heart:'<path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .7 6.4 3.3C14.4 4.7 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.7C19.5 16.4 12 21 12 21z"/>',
-    layers:'<path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/>',
-    clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
-    leaf:'<path d="M11 20A7 7 0 0 1 4 13c0-6 7-11 15-11 0 8-5 15-11 15-1.3 0-2.6-.3-3.8-.9"/><path d="M4 13c0 5 3 7 7 7"/>',
-    shield:'<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>',
-    package:'<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>',
-    user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>'
+  // Navbar scroll state
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if (window.scrollY > 40) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
   };
-  function iconSvg(name){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name]||ICONS.heart) + '</svg>'; }
-  function starIcon(filled){ return '<svg viewBox="0 0 24 24" fill="'+(filled?'#c9a227':'none')+'" stroke="#c9a227" stroke-width="1.3"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9"/></svg>'; }
-  function starsHtml(rating){
-    let h = '<span class="stars">';
-    for(let i=1;i<=5;i++) h += starIcon(i<=Math.round(rating));
-    h += '</span>';
-    return h;
-  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-  /* ---------------- STATE ---------------- */
-  let wishlist = [];
-  let allReviews = [...defaultReviews];
-  let activeFilter = "All";
-  let selectedStar = 0;
+  // Mobile menu
+  const toggle = document.getElementById('mobileToggle');
+  const menu = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
 
-  /* ---------------- STORAGE ---------------- */
-  async function loadWishlist(){
-    try{ const w = await window.storage.get('aleez-wishlist', false); wishlist = w && w.value ? JSON.parse(w.value) : []; }
-    catch(e){ wishlist = []; }
-  }
-  async function saveWishlist(){ try{ await window.storage.set('aleez-wishlist', JSON.stringify(wishlist), false); }catch(e){} }
-  async function loadReviews(){
-    try{
-      const r = await window.storage.get('aleez-reviews', true);
-      const stored = r && r.value ? JSON.parse(r.value) : [];
-      allReviews = [...defaultReviews, ...stored];
-    }catch(e){ allReviews = [...defaultReviews]; }
-  }
-  async function addReview(rev){
-    let stored = [];
-    try{ const r = await window.storage.get('aleez-reviews', true); stored = r && r.value ? JSON.parse(r.value) : []; }catch(e){ stored = []; }
-    stored.push(rev);
-    try{ await window.storage.set('aleez-reviews', JSON.stringify(stored), true); }catch(e){}
-    allReviews = [...defaultReviews, ...stored];
-  }
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
 
-  /* ---------------- HELPERS ---------------- */
-  function fmt(n){ return "₹" + n.toLocaleString('en-IN'); }
-  function getProduct(id){ return products.find(p=>p.id===id); }
-  function reviewsFor(productId){ return allReviews.filter(r=>r.productId===productId); }
-  function avgRating(productId){
-    const rs = reviewsFor(productId);
-    if(rs.length===0) return 5;
-    return rs.reduce((s,r)=>s+r.rating,0)/rs.length;
-  }
-  function showToast(msg){
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    clearTimeout(t._timer); t._timer = setTimeout(()=>t.classList.remove('show'), 2400);
-  }
-  function bottleSVG(p, uid, big){
-    const gid = "grad" + uid;
-    return `<svg viewBox="0 0 140 220" xmlns="http://www.w3.org/2000/svg" ${big?'class="main-bottle"':''}>
-      <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${p.colorB}"/><stop offset="100%" stop-color="${p.colorA}"/></linearGradient></defs>
-      <rect x="30" y="60" width="80" height="130" rx="5" fill="#1a1418" stroke="${p.colorB}" stroke-opacity="0.45"/>
-      <rect x="35" y="120" width="70" height="65" fill="url(#${gid})" opacity="0.9"/>
-      <rect x="48" y="30" width="44" height="34" rx="3" fill="#100d10" stroke="${p.colorB}" stroke-opacity="0.5"/>
-      <rect x="56" y="10" width="28" height="24" rx="2" fill="#0b0a0c" stroke="${p.colorB}" stroke-opacity="0.6"/>
-      <text x="70" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="${p.colorB}" opacity="0.85">N${String(p.id).padStart(2,'0')}</text>
-    </svg>`;
-  }
-  function wishBtn(id){
-    const active = wishlist.includes(id);
-    return `<button class="wishlist-btn ${active?'active':''}" data-wish="${id}" aria-label="Wishlist">
-      <svg viewBox="0 0 24 24" fill="${active?'currentColor':'none'}" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .7 6.4 3.3C14.4 4.7 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
-    </button>`;
-  }
-  function productCard(p, idx){
-    const rating = avgRating(p.id), count = reviewsFor(p.id).length;
-    return `
-    <div class="product-card" data-open="${p.id}">
-      <div class="product-top">
-        <span class="product-no mono">N${String(p.id).padStart(2,'0')}</span>
-        ${wishBtn(p.id)}
-      </div>
-      <div class="bottle-stage">${bottleSVG(p, 'g'+p.id+idx)}</div>
-      <div class="product-info">
-        <div class="fam">${p.fam}</div>
-        <h3>${p.name}</h3>
-        <div class="stars-row">${starsHtml(rating)}<span class="rcount mono">(${count})</span></div>
-        <div class="desc">${p.desc}</div>
-      </div>
-      <div class="product-bottom">
-        <span class="price">${fmt(p.price)}</span>
-        <div class="card-actions">
-          <button class="btn-icon-sm" data-wa="${p.id}" aria-label="Buy on WhatsApp" title="Buy on WhatsApp">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20z"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>`;
-  }
+  // ---- Scent builder state ----
+  const state = { path:null, details:'', notes:[], bottle:null, price:null };
 
-  /* ---------------- ROUTER ---------------- */
-  const viewEls = {};
-  document.querySelectorAll('[data-view]').forEach(el=>{ viewEls[el.getAttribute('data-view')] = el; });
+  const panels = { inspired:'panel-inspired', custom:'panel-custom', recommend:'panel-recommend', attar:'panel-attar' };
+  const pathLabels = { inspired:'Inspired by a fragrance', custom:'Create my own', recommend:'Recommend one for me', attar:'Attar' };
 
-  function router(){
-    const hash = location.hash || '#/home';
-    const clean = hash.replace('#/','').split('?')[0];
-    const parts = clean.split('/');
-    const route = parts[0] || 'home';
+  document.querySelectorAll('.builder-card').forEach(card => {
+    const open = () => {
+      document.querySelectorAll('.builder-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.builder-panel').forEach(p => p.classList.remove('open'));
+      card.classList.add('active');
+      const key = card.dataset.panel;
+      document.getElementById(panels[key]).classList.add('open');
+      state.path = pathLabels[key];
+      updateSummary();
+      document.getElementById(panels[key]).scrollIntoView({behavior:'smooth', block:'nearest'});
+    };
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
 
-    Object.values(viewEls).forEach(el=>el.classList.remove('active'));
-    window.scrollTo({top:0, behavior:'auto'});
-
-    if(route==='product' && parts[1]){
-      renderProductPage(parseInt(parts[1]));
-      viewEls.product.classList.add('active');
-    } else if(route==='wishlist'){
-      renderWishlistPage();
-      viewEls.wishlist.classList.add('active');
-    } else if(route==='reviews'){
-      renderReviewsPage();
-      viewEls.reviews.classList.add('active');
-    } else if(route==='services'){
-      renderServicesPage();
-      viewEls.services.classList.add('active');
-    } else if(route==='features'){
-      renderFeaturesPage();
-      viewEls.features.classList.add('active');
-    } else if(route==='contact'){
-      wireContactPage();
-      viewEls.contact.classList.add('active');
-    } else {
-      viewEls.home.classList.add('active');
-    }
-    updateActiveNav(route);
-    closeMobileMenu();
-  }
-  function updateActiveNav(route){
-    document.querySelectorAll('.nav-links a').forEach(a=>{
-      a.classList.toggle('active', a.dataset.route===route || (route==='home' && a.dataset.route==='home'));
-    });
-  }
-  function goTo(hash){ location.hash = hash; }
-
-  /* ---------------- HOME RENDER ---------------- */
-  function renderMarquee(){
-    const words = ["OUD", "AMBER", "SAFFRON", "VELVET SMOKE", "LEATHER", "WHITE MUSK", "GOLD", "FIG"];
-    const html = words.map(w=>`<span>${w}</span>`).join('');
-    document.getElementById('marqueeTrack').innerHTML = html + html;
-  }
-  function renderFilters(){
-    const el = document.getElementById('filters');
-    el.innerHTML = FAMILIES.map(f => `<button class="filter-chip ${f===activeFilter?'active':''}" data-fam="${f}">${f}</button>`).join('');
-    el.querySelectorAll('.filter-chip').forEach(btn=>{
-      btn.addEventListener('click', ()=>{ activeFilter = btn.dataset.fam; renderFilters(); renderGrid(); });
-    });
-  }
-  function renderGrid(){
-    const grid = document.getElementById('productGrid');
-    const list = activeFilter==="All" ? products : products.filter(p=>p.fam===activeFilter);
-    grid.innerHTML = list.map((p,i)=>productCard(p,i)).join('');
-    grid.querySelectorAll('[data-open]').forEach(card=>{
-      card.addEventListener('click', (e)=>{
-        if(e.target.closest('[data-wish]') || e.target.closest('[data-wa]')) return;
-        goTo('#/product/' + card.dataset.open);
-      });
-    });
-    grid.querySelectorAll('[data-wish]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); toggleWishlist(parseInt(b.dataset.wish)); }));
-    grid.querySelectorAll('[data-wa]').forEach(b=>b.addEventListener('click', e=>{
-      e.stopPropagation();
-      const p = getProduct(parseInt(b.dataset.wa));
-      window.open(waLink(`Hi Aleez Perfumes! I'd like to order:\n${p.name} (N${String(p.id).padStart(2,'0')}) — ${fmt(p.price)}\n\nPlease confirm availability.`), '_blank');
-    }));
-    observeCards();
-  }
-  function renderCorrespondence(){
-    const picks = defaultReviews.slice(0,3);
-    document.getElementById('corrGrid').innerHTML = picks.map(r=>`
-      <div class="letter">${starsHtml(r.rating)}<p class="body">"${r.text}"</p><div class="sign mono">${r.name}</div></div>
-    `).join('');
-  }
-  function renderAtelier(){
-    document.getElementById('atelierScroll').innerHTML = atelier.map(a=>`
-      <div class="atelier-card"><div class="num mono">${a.num}</div><h4>${a.title}</h4><p>${a.body}</p></div>
-    `).join('');
-  }
-
-  /* ---------------- WISHLIST LOGIC ---------------- */
-  function toggleWishlist(id){
-    if(wishlist.includes(id)) wishlist = wishlist.filter(w=>w!==id);
-    else { wishlist.push(id); showToast(getProduct(id).name + " added to wishlist"); }
-    saveWishlist();
-    refreshWishBadges();
-  }
-  function refreshWishBadges(){
-    const el = document.getElementById('wishCount');
-    el.textContent = wishlist.length;
-    el.classList.toggle('show', wishlist.length>0);
-    document.querySelectorAll('[data-wish]').forEach(b=>{
-      const id = parseInt(b.dataset.wish);
-      const active = wishlist.includes(id);
-      b.classList.toggle('active', active);
-      const svg = b.querySelector('svg');
-      if(svg) svg.setAttribute('fill', active?'currentColor':'none');
-    });
-    if(viewEls.wishlist.classList.contains('active')) renderWishlistPage();
-    if(viewEls.product.classList.contains('active')){
-      const idAttr = document.getElementById('productPageRoot').dataset.pid;
-      if(idAttr) renderProductPage(parseInt(idAttr), true);
-    }
-  }
-
-  /* ---------------- PRODUCT PAGE ---------------- */
-  function renderProductPage(id, silent){
-    const p = getProduct(id);
-    const root = document.getElementById('productPageRoot');
-    if(!p){ root.innerHTML = '<p>Product not found.</p>'; return; }
-    root.dataset.pid = id;
-    const rating = avgRating(id), revs = reviewsFor(id);
-    const related = products.filter(rp=>rp.fam===p.fam && rp.id!==p.id).slice(0,3);
-    const relatedList = related.length ? related : products.filter(rp=>rp.id!==p.id).slice(0,3);
-
-    root.innerHTML = `
-      <div class="page-fade">
-        <div class="breadcrumb"><a href="#/home">Home</a><span>/</span><a href="#/home" data-scroll="collection">Collection</a><span>/</span><span>${p.name}</span></div>
-        <div class="product-page-grid">
-          <div class="pp-visual">
-            ${bottleSVG(p, 'pp'+p.id, true)}
-            <div class="pp-thumbs">
-              <div class="pp-thumb">TOP</div><div class="pp-thumb">HEART</div><div class="pp-thumb">BASE</div>
-            </div>
-          </div>
-          <div class="pp-info">
-            <div class="fam">${p.fam} — N${String(p.id).padStart(2,'0')}</div>
-            <h1>${p.name}</h1>
-            <div class="stars-row">${starsHtml(rating)}<span class="rcount mono">${rating.toFixed(1)} · ${revs.length} review${revs.length===1?'':'s'}</span></div>
-            <div class="pp-price mono">${fmt(p.price)}</div>
-            <div class="pp-stock mono">● IN STOCK — SHIPS IN 2 DAYS</div>
-            <p class="pp-desc">${p.desc}</p>
-            <ul class="pp-highlights">${p.highlights.map(h=>`<li>${h}</li>`).join('')}</ul>
-            <div class="pp-buybox">
-              <div class="qty-stepper">
-                <button type="button" id="qtyMinus">−</button>
-                <span id="qtyVal">1</span>
-                <button type="button" id="qtyPlus">+</button>
-              </div>
-              <div class="pp-buy-actions">
-                <button class="btn-wa" id="ppBuyWa">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20z"/></svg>
-                  <span>Buy via WhatsApp</span>
-                </button>
-                <button class="btn-icon-sm" id="ppWish" style="width:52px; height:52px;" aria-label="Wishlist">
-                  <svg viewBox="0 0 24 24" fill="${wishlist.includes(p.id)?'currentColor':'none'}" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2 4.5 5.6 4c2.1-.3 4 .7 6.4 3.3C14.4 4.7 16.3 3.7 18.4 4c3.6.5 5.2 4.1 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
-                </button>
-              </div>
-              <div class="pp-note">This store takes orders through WhatsApp only. Tapping "Buy" opens a pre-filled message to +91 93455 26905 — nothing is charged here.</div>
-            </div>
-
-            <div class="pp-block">
-              <h3>Notes Breakdown</h3>
-              <div class="pp-notes-grid">
-                <div class="pp-note-row"><span class="lbl mono">TOP</span><span>${p.top.join(', ')}</span></div>
-                <div class="pp-note-row"><span class="lbl mono">HEART</span><span>${p.heart.join(', ')}</span></div>
-                <div class="pp-note-row"><span class="lbl mono">BASE</span><span>${p.base.join(', ')}</span></div>
-              </div>
-            </div>
-
-            <div class="pp-block">
-              <h3>Reviews for ${p.name}</h3>
-              ${revs.length ? revs.map(r=>`
-                <div style="padding:16px 0; border-bottom:1px solid var(--line);">
-                  ${starsHtml(r.rating)}
-                  <p style="font-size:13.5px; color:var(--smoke-dim); margin-top:8px; line-height:1.6; font-weight:300;">${r.text}</p>
-                  <div class="mono" style="font-size:11px; color:var(--smoke-faint); margin-top:8px;">— ${r.name}</div>
-                </div>`).join('') : '<p style="color:var(--smoke-dim); font-size:13.5px;">No reviews yet for this fragrance.</p>'}
-              <div style="margin-top:18px;"><a class="btn-ghost" href="#/reviews">Leave a Review →</a></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pp-block" style="margin-top:60px;">
-          <h3>You May Also Like</h3>
-          <div class="related-row">
-            ${relatedList.map((rp,i)=>productCard(rp,i)).join('')}
-          </div>
-        </div>
-      </div>
-    `;
-
-    let qty = 1;
-    const qtyVal = document.getElementById('qtyVal');
-    document.getElementById('qtyMinus').addEventListener('click', ()=>{ if(qty>1){ qty--; qtyVal.textContent=qty; } });
-    document.getElementById('qtyPlus').addEventListener('click', ()=>{ qty++; qtyVal.textContent=qty; });
-    document.getElementById('ppBuyWa').addEventListener('click', ()=>{
-      window.open(waLink(`Hi Aleez Perfumes! I'd like to order:\n${qty} x ${p.name} (N${String(p.id).padStart(2,'0')}) — ${fmt(p.price)} each\nTotal: ${fmt(p.price*qty)}\n\nPlease confirm availability and shipping.`), '_blank');
-    });
-    document.getElementById('ppWish').addEventListener('click', ()=>{ toggleWishlist(p.id); });
-
-    root.querySelectorAll('.related-row [data-open]').forEach(card=>{
-      card.addEventListener('click', (e)=>{
-        if(e.target.closest('[data-wish]') || e.target.closest('[data-wa]')) return;
-        goTo('#/product/' + card.dataset.open);
-        renderProductPage(parseInt(card.dataset.open));
-      });
-    });
-    root.querySelectorAll('.related-row [data-wish]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); toggleWishlist(parseInt(b.dataset.wish)); }));
-    root.querySelectorAll('.related-row [data-wa]').forEach(b=>b.addEventListener('click', e=>{
-      e.stopPropagation();
-      const rp = getProduct(parseInt(b.dataset.wa));
-      window.open(waLink(`Hi Aleez Perfumes! I'd like to order:\n${rp.name} (N${String(rp.id).padStart(2,'0')}) — ${fmt(rp.price)}\n\nPlease confirm availability.`), '_blank');
-    }));
-
-    const bcScroll = root.querySelector('[data-scroll="collection"]');
-    if(bcScroll) bcScroll.addEventListener('click', (e)=>{ e.preventDefault(); goTo('#/home'); setTimeout(()=>scrollToSection('collection'), 60); });
-  }
-
-  /* ---------------- WISHLIST PAGE ---------------- */
-  function renderWishlistPage(){
-    const root = document.getElementById('wishlistRoot');
-    if(wishlist.length===0){
-      root.innerHTML = `<div class="wishlist-empty page-fade"><h3>Nothing saved yet.</h3><p>Tap the heart on any fragrance to save it here.</p><a class="btn-primary" href="#/home" style="display:inline-block; margin-top:22px;" data-scroll="collection">Browse the Collection</a></div>`;
-      const l = root.querySelector('[data-scroll="collection"]');
-      if(l) l.addEventListener('click', (e)=>{ e.preventDefault(); goTo('#/home'); setTimeout(()=>scrollToSection('collection'),60); });
-      return;
-    }
-    const items = wishlist.map(id=>getProduct(id)).filter(Boolean);
-    const totalMsg = items.map(p=>`${p.name} (N${String(p.id).padStart(2,'0')}) — ${fmt(p.price)}`).join('\n');
-    const total = items.reduce((s,p)=>s+p.price,0);
-    root.innerHTML = `
-      <div class="page-fade">
-        <div class="wishlist-toolbar">
-          <span class="mono" style="font-size:12px; color:var(--smoke-faint);">${items.length} item${items.length===1?'':'s'} saved · ${fmt(total)}</span>
-          <button class="btn-wa" id="wishBuyAll">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20z"/></svg>
-            <span>Buy All via WhatsApp</span>
-          </button>
-        </div>
-        <div class="wishlist-grid">${items.map((p,i)=>productCard(p,i)).join('')}</div>
-      </div>
-    `;
-    root.querySelectorAll('[data-open]').forEach(card=>{
-      card.addEventListener('click', (e)=>{
-        if(e.target.closest('[data-wish]') || e.target.closest('[data-wa]')) return;
-        goTo('#/product/' + card.dataset.open);
-      });
-    });
-    root.querySelectorAll('[data-wish]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); toggleWishlist(parseInt(b.dataset.wish)); }));
-    root.querySelectorAll('[data-wa]').forEach(b=>b.addEventListener('click', e=>{
-      e.stopPropagation();
-      const p = getProduct(parseInt(b.dataset.wa));
-      window.open(waLink(`Hi Aleez Perfumes! I'd like to order:\n${p.name} (N${String(p.id).padStart(2,'0')}) — ${fmt(p.price)}\n\nPlease confirm availability.`), '_blank');
-    }));
-    document.getElementById('wishBuyAll').addEventListener('click', ()=>{
-      window.open(waLink(`Hi Aleez Perfumes! I'd like to order everything on my wishlist:\n\n${totalMsg}\n\nTotal: ${fmt(total)}\n\nPlease confirm availability and shipping.`), '_blank');
-    });
-  }
-
-  /* ---------------- REVIEWS PAGE ---------------- */
-  function renderReviewsPage(){
-    const root = document.getElementById('reviewsRoot');
-    const avg = allReviews.reduce((s,r)=>s+r.rating,0)/allReviews.length;
-    root.innerHTML = `
-      <div class="section-head page-fade">
-        <span class="eyebrow">Correspondence</span>
-        <h2>What people say<br>after <i>wearing Aleez.</i></h2>
-      </div>
-      <div class="reviews-overview page-fade">
-        <div class="avg">${avg.toFixed(1)}</div>
-        <div>
-          ${starsHtml(avg)}
-          <div class="mono" style="font-size:12px; color:var(--smoke-faint); margin-top:8px;">${allReviews.length} reviews across all fragrances</div>
-        </div>
-      </div>
-      <div class="reviews-list page-fade">
-        ${allReviews.slice().reverse().map(r=>{
-          const p = getProduct(r.productId);
-          return `<div class="review-item">
-            <div class="top"><span class="name">${r.name}</span>${starsHtml(r.rating)}</div>
-            ${p ? `<div class="prod mono">${p.name}</div>` : ''}
-            <p>${r.text}</p>
-          </div>`;
-        }).join('')}
-      </div>
-      <div class="review-form page-fade">
-        <h3>Leave a Review</h3>
-        <form id="reviewForm">
-          <div class="form-row"><label>Your name</label><input type="text" id="rvName" required></div>
-          <div class="form-row"><label>Fragrance</label>
-            <select id="rvProduct" required>
-              <option value="">Choose a fragrance</option>
-              ${products.map(p=>`<option value="${p.id}">${p.name}</option>`).join('')}
-            </select>
-          </div>
-          <div class="form-row"><label>Rating</label><div class="star-picker" id="starPicker">${[1,2,3,4,5].map(n=>`<button type="button" data-star="${n}">${starIcon(true)}</button>`).join('')}</div></div>
-          <div class="form-row"><label>Review</label><textarea id="rvText" required placeholder="How does it wear on you?"></textarea></div>
-          <button type="submit" class="btn-primary" style="width:100%;">Submit Review</button>
-          <div class="form-msg" id="rvMsg"></div>
-        </form>
-        <div class="pp-note" style="margin-top:14px;">Reviews you submit here are visible to everyone who visits this page.</div>
-      </div>
-    `;
-    selectedStar = 0;
-    const picker = document.getElementById('starPicker');
-    picker.querySelectorAll('button').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        selectedStar = parseInt(btn.dataset.star);
-        picker.querySelectorAll('button').forEach(b=>b.classList.toggle('sel', parseInt(b.dataset.star)<=selectedStar));
-      });
-    });
-    document.getElementById('reviewForm').addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      if(selectedStar===0){ document.getElementById('rvMsg').textContent = 'Please select a star rating.'; return; }
-      const rev = {
-        id: 'u' + Date.now(),
-        productId: parseInt(document.getElementById('rvProduct').value),
-        name: document.getElementById('rvName').value.trim(),
-        rating: selectedStar,
-        text: document.getElementById('rvText').value.trim()
-      };
-      await addReview(rev);
-      document.getElementById('rvMsg').textContent = 'Thank you — your review is now live.';
-      renderReviewsPage();
-    });
-  }
-
-  /* ---------------- SERVICES / FEATURES PAGES ---------------- */
-  function renderServicesPage(){
-    document.getElementById('servicesRoot').innerHTML = services.map(s=>`
-      <div class="info-card page-fade">
-        <div class="icon-wrap">${iconSvg(s.icon)}</div>
-        <h3>${s.title}</h3>
-        <p>${s.body}</p>
-        <a class="btn-ghost" data-svc="${s.cta}" style="display:inline-block;">Enquire →</a>
-      </div>
-    `).join('');
-    document.querySelectorAll('[data-svc]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        window.open(waLink(`Hi Aleez Perfumes! ${a.dataset.svc}.`), '_blank');
-      });
-    });
-  }
-  function renderFeaturesPage(){
-    document.getElementById('featuresRoot').innerHTML = features.map(f=>`
-      <div class="info-card page-fade">
-        <div class="icon-wrap">${iconSvg(f.icon)}</div>
-        <h3>${f.title}</h3>
-        <p>${f.body}</p>
-      </div>
-    `).join('');
-  }
-
-  /* ---------------- CONTACT PAGE ---------------- */
-  function wireContactPage(){
-    document.getElementById('contactWaBtn').href = waLink("Hi Aleez Perfumes! I have a question.");
-    const form = document.getElementById('contactForm');
-    if(!form._wired){
-      form._wired = true;
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const name = document.getElementById('cfName').value.trim();
-        const msg = document.getElementById('cfMsg').value.trim();
-        window.open(waLink(`Hi Aleez Perfumes, I'm ${name}.\n\n${msg}`), '_blank');
-      });
-    }
-  }
-
-  /* ---------------- SCROLL REVEALS (home) ---------------- */
-  function observeReveals(){
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold:0.15 });
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    document.querySelectorAll('.letter').forEach((el,i)=>{
-      const ioL = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting){ setTimeout(()=>en.target.classList.add('in'), i*120); ioL.unobserve(en.target); } });
-      }, { threshold:0.3 });
-      ioL.observe(el);
-    });
-  }
-  function observeCards(){
-    document.querySelectorAll('#productGrid .product-card').forEach((el,i)=>{
-      const ioC = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting){ setTimeout(()=>en.target.classList.add('in'), (i%3)*90); ioC.unobserve(en.target); } });
-      }, { threshold:0.15 });
-      ioC.observe(el);
-    });
-  }
-
-  /* ---------------- PYRAMID (signature, fixed line-length bug) ---------------- */
-  function initPyramid(){
-    const paths = { 1: document.getElementById('tpath1'), 2: document.getElementById('tpath2'), 3: document.getElementById('tpath3') };
-    const plumes = { 1: document.getElementById('plume1'), 2: document.getElementById('plume2'), 3: document.getElementById('plume3') };
-    Object.values(paths).forEach(p=>{
-      const len = p.getTotalLength();
-      p.style.strokeDasharray = len;
-      p.style.strokeDashoffset = len;
-    });
-    document.querySelectorAll('.tier').forEach(tierEl=>{
-      const n = tierEl.dataset.tier;
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(en.isIntersecting){
-            en.target.classList.add('in');
-            const path = paths[n];
-            if(path) path.style.strokeDashoffset = 0;
-            const plume = plumes[n];
-            if(plume) plume.classList.add('active');
-            io.unobserve(en.target);
-          }
-        });
-      }, { threshold:0.5 });
-      io.observe(tierEl);
-    });
-  }
-
-  /* ---------------- PARTICLES ---------------- */
-  function initParticles(){
-    const field = document.getElementById('particleField');
-    if(!field || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    for(let i=0;i<14;i++){
-      const p = document.createElement('div');
-      p.className = 'float-particle';
-      const size = 2 + Math.random()*3;
-      p.style.width = size+'px'; p.style.height = size+'px';
-      p.style.left = (10 + Math.random()*80) + '%';
-      p.style.bottom = (Math.random()*30) + '%';
-      p.style.animationDuration = (8 + Math.random()*8) + 's';
-      p.style.animationDelay = (Math.random()*8) + 's';
-      field.appendChild(p);
-    }
-  }
-
-  /* ---------------- SCROLL HELPERS ---------------- */
-  function scrollToSection(id){
+  ['inspiredName','inspiredNotes','recDesc'].forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth'});
+    el.addEventListener('input', updateSummary);
+  });
+
+  document.querySelectorAll('#noteGroup .pill, #attarNoteGroup .pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      pill.classList.toggle('selected');
+      const note = pill.dataset.note;
+      if (pill.classList.contains('selected')) state.notes.push(note);
+      else state.notes = state.notes.filter(n => n !== note);
+      updateSummary();
+    });
+  });
+
+  document.querySelectorAll('[data-select-bottle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.bottle-card');
+      state.bottle = card.dataset.size;
+      state.price = card.dataset.price;
+      document.querySelectorAll('.bottle-card').forEach(c => c.style.outline = '');
+      card.style.outline = '2px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--gold');
+      updateSummary();
+      document.getElementById('order').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  function detailsText(){
+    const inspiredName = document.getElementById('inspiredName').value.trim();
+    const inspiredNotes = document.getElementById('inspiredNotes').value.trim();
+    const recDesc = document.getElementById('recDesc').value.trim();
+    if (state.path === 'Inspired by a fragrance') {
+      let t = inspiredName ? ('Inspired by: ' + inspiredName) : '';
+      if (inspiredNotes) t += (t ? ' — ' : '') + inspiredNotes;
+      return t;
+    }
+    if (state.path === 'Create my own' || state.path === 'Attar') {
+      return state.notes.length ? state.notes.join(', ') : '';
+    }
+    if (state.path === 'Recommend one for me') {
+      return recDesc;
+    }
+    return '';
   }
 
-  /* ---------------- NAV / MOBILE MENU ---------------- */
-  function closeMobileMenu(){
-    document.getElementById('navLinks').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
+  function updateSummary(){
+    state.details = detailsText();
+    const hasPath = !!state.path;
+    const hasBottle = !!state.bottle;
+    document.getElementById('summaryEmpty').style.display = (hasPath || hasBottle) ? 'none' : 'block';
+    document.getElementById('summaryContent').style.display = (hasPath || hasBottle) ? 'block' : 'none';
+    document.getElementById('sumPath').textContent = state.path || '—';
+    document.getElementById('sumDetails').textContent = state.details || '—';
+    document.getElementById('sumBottle').textContent = state.bottle || '—';
+    document.getElementById('sumPrice').textContent = state.price || '—';
+
+    const lines = ['Hi Aleez Perfumes, I would like to order:'];
+    if (state.path) lines.push('Scent path: ' + state.path);
+    if (state.details) lines.push('Details: ' + state.details);
+    if (state.bottle) lines.push('Bottle: ' + state.bottle + (state.price ? (' (' + state.price + ')') : ''));
+    if (lines.length === 1) lines.push("I'd like to build a custom scent.");
+    const msg = encodeURIComponent(lines.join('\n'));
+    document.getElementById('sendWhatsapp').href = 'https://wa.me/919345526905?text=' + msg;
   }
-  function wireChrome(){
-    window.addEventListener('scroll', ()=>{
-      document.getElementById('nav').classList.toggle('scrolled', window.scrollY>40);
-    });
-    document.getElementById('hamburger').addEventListener('click', ()=>{
-      document.getElementById('navLinks').classList.toggle('open');
-      document.getElementById('hamburger').classList.toggle('open');
-    });
-    document.querySelectorAll('[data-link]').forEach(el=>{
-      el.addEventListener('click', ()=>{ goTo(el.dataset.link); });
-    });
-    document.querySelectorAll('[data-scroll]').forEach(el=>{
-      el.addEventListener('click', (e)=>{
-        const target = el.dataset.scroll;
-        if(location.hash === '#/home' || location.hash===''){
-          e.preventDefault();
-          scrollToSection(target);
-          closeMobileMenu();
-        } else {
-          goTo('#/home');
-          setTimeout(()=>scrollToSection(target), 80);
-        }
+
+  // ---- Mood cards (Find Your Direction) ----
+  const moodIcons = {
+    droplet: '<path d="M12 3 C12 3 6 10.5 6 15 a6 6 0 0 0 12 0 C18 10.5 12 3 12 3Z" fill="none" stroke="#B3915F" stroke-width="1.1"/>',
+    leaf: '<path d="M4 18 C4 10 10 4 20 4 C20 14 14 20 4 18Z" fill="none" stroke="#B3915F" stroke-width="1.1"/><path d="M4 18 C9 14 13 9 20 4" fill="none" stroke="#B3915F" stroke-width="0.8"/>',
+    wood: '<path d="M4 6 Q12 2 20 6" fill="none" stroke="#B3915F" stroke-width="1"/><path d="M4 12 Q12 8 20 12" fill="none" stroke="#B3915F" stroke-width="1"/><path d="M4 18 Q12 14 20 18" fill="none" stroke="#B3915F" stroke-width="1"/>',
+    flame: '<path d="M12 2 C8 7 6 10 6 14 a6 6 0 0 0 12 0 c0 -2 -1 -3.5 -2.4 -5 c0.3 2 -0.6 3 -1.6 3 c-1.2 0 -1.8 -1 -1.6 -2.6 C13 7 12.6 4.6 12 2Z" fill="none" stroke="#B3915F" stroke-width="1.1"/>',
+    sun: '<circle cx="12" cy="12" r="4.2" fill="none" stroke="#B3915F" stroke-width="1.1"/><g stroke="#B3915F" stroke-width="1"><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7" y2="7"/><line x1="17" y1="17" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="7" y2="17"/><line x1="17" y1="7" x2="19.1" y2="4.9"/></g>',
+    rose: '<circle cx="12" cy="12" r="3.2" fill="none" stroke="#B3915F" stroke-width="1"/><circle cx="12" cy="12" r="7" fill="none" stroke="#B3915F" stroke-width="1"/><path d="M12 5 v14 M5 12 h14" stroke="#B3915F" stroke-width="0.6" opacity="0.6"/>',
+    amber: '<path d="M7 4 h10 l2 6 a7 7 0 0 1 -14 0 Z" fill="none" stroke="#B3915F" stroke-width="1.1"/><line x1="12" y1="4" x2="12" y2="1.5" stroke="#B3915F" stroke-width="1.1"/>',
+    musk: '<circle cx="12" cy="12" r="7.5" fill="none" stroke="#B3915F" stroke-width="1.1"/><circle cx="12" cy="12" r="2.4" fill="#B3915F"/>'
+  };
+  const moods = [
+    {name:'Fresh & Clean', notes:['Fresh','Aquatic'], c1:'#F6F5EF', c2:'#DCE4DD', icon:'leaf'},
+    {name:'Vanilla & Sweet', notes:['Vanilla','Sweet'], c1:'#F8EFDF', c2:'#E7CE9F', icon:'droplet'},
+    {name:'Oud & Woody', notes:['Oud','Woody'], c1:'#F0E8D9', c2:'#C3AD87', icon:'wood'},
+    {name:'Dark & Mysterious', notes:['Leather','Tobacco'], c1:'#E9E3D6', c2:'#8B8072', icon:'flame'},
+    {name:'Citrus & Energetic', notes:['Citrus','Fresh'], c1:'#F8F2D8', c2:'#E6C871', icon:'sun'},
+    {name:'Rose & Floral', notes:['Rose','Floral'], c1:'#F8EEEB', c2:'#E1BEB7', icon:'rose'},
+    {name:'Warm Amber', notes:['Amber','Musk'], c1:'#F4E7D0', c2:'#CB9A55', icon:'amber'},
+    {name:'Clean Musk', notes:['Musk','Sandalwood'], c1:'#F1EEE5', c2:'#C7BFAC', icon:'musk'}
+  ];
+  const moodGrid = document.getElementById('moodGrid');
+  moods.forEach((m, i) => {
+    const el = document.createElement('div');
+    el.className = 'mood-card reveal';
+    el.style.transitionDelay = (0.05 * (i % 4)) + 's';
+    el.innerHTML = `
+      <div class="mood-bg" style="background:radial-gradient(ellipse at 30% 25%, ${m.c1} 0%, ${m.c2} 75%);"></div>
+      <div class="mood-vignette"></div>
+      <div class="mood-sheen"></div>
+      <svg class="mood-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">${moodIcons[m.icon]}</svg>
+      <div class="mood-label"><span>${m.name}</span><small>${m.notes.join(' · ')}</small></div>
+    `;
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.builder-card[data-panel="custom"]')[0].click();
+      document.querySelectorAll('#noteGroup .pill').forEach(p => p.classList.remove('selected'));
+      state.notes = [];
+      m.notes.forEach(n => {
+        const p = document.querySelector('#noteGroup .pill[data-note="'+n+'"]');
+        if (p) { p.classList.add('selected'); state.notes.push(n); }
       });
+      updateSummary();
     });
-    document.getElementById('navWaBtn').href = waLink("Hi Aleez Perfumes! I have a question.");
-    document.getElementById('homeWaCta').href = waLink("Hi Aleez Perfumes! I'd like to place an order.");
-    document.getElementById('footerWaLink').href = waLink("Hi Aleez Perfumes! I have a question.");
-    window.addEventListener('hashchange', router);
-  }
+    moodGrid.appendChild(el);
+    io.observe(el);
+  });
 
-  /* ---------------- INIT ---------------- */
-  async function init(){
-    renderMarquee();
-    renderFilters();
-    renderCorrespondence();
-    renderAtelier();
-    wireChrome();
-    initParticles();
-    observeReveals();
-    initPyramid();
-    await loadWishlist();
-    await loadReviews();
-    renderGrid();
-    refreshWishBadges();
-    router();
-  }
+  // ---- Attar cards ----
+  const attars = [
+    {name:'Oud', tone:'#C9B79A'},
+    {name:'Musk', tone:'#D5CFC1'},
+    {name:'Rose', tone:'#E4C3BE'},
+    {name:'Amber', tone:'#D2A666'},
+    {name:'Sandalwood', tone:'#D8C6A8'},
+    {name:'Fresh', tone:'#E3E7E0'}
+  ];
+  const attarGrid = document.getElementById('attarGrid');
+  attars.forEach((a, i) => {
+    const el = document.createElement('div');
+    el.className = 'attar-card reveal';
+    el.style.transitionDelay = (0.06 * (i % 3)) + 's';
+    el.innerHTML = `
+      <div class="attar-visual" style="background:radial-gradient(ellipse at 50% 30%, #FFFFFF 0%, ${a.tone} 130%);">
+        <div class="attar-glow"></div>
+        <div class="attar-ring"></div>
+        <svg width="34%" viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="2" width="20" height="9" rx="1.5" fill="#171714"/>
+          <rect x="20" y="9" width="20" height="2.4" fill="#B3915F"/>
+          <path d="M17 13 L43 13 L47 38 Q49 52 49 62 L49 78 Q49 85 42 85 L18 85 Q11 85 11 78 L11 62 Q11 52 13 38 Z" fill="#ffffff" stroke="#DCD6C9" stroke-width="1"/>
+          <path d="M22 40 L38 40 L38 66 L22 66 Z" fill="none" stroke="#B3915F" stroke-width="0.7" opacity="0.65"/>
+          <circle cx="30" cy="53" r="4.2" fill="none" stroke="#B3915F" stroke-width="0.7" opacity="0.65"/>
+        </svg>
+      </div>
+      <div class="attar-info">
+        <h3>${a.name}</h3>
+        <div class="price">Price on request</div>
+      </div>
+    `;
+    attarGrid.appendChild(el);
+    io.observe(el);
+  });
 
-  document.addEventListener('DOMContentLoaded', init);
+  // Sticky CTA hide near footer/order on small screens
+  const stickyCta = document.getElementById('stickyCta');
+  const orderSection = document.getElementById('order');
+  const footerEl = document.querySelector('footer');
+  const hideIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) stickyCta.style.transform = 'translateY(100%)';
+    });
+  }, {threshold:0.05});
+  if (window.innerWidth <= 600) { hideIO.observe(orderSection); hideIO.observe(footerEl); }
+  stickyCta.style.transition = 'transform .4s ease';
 })();
 </script>
 </body>
